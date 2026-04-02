@@ -1,0 +1,109 @@
+<div class="h-20 flex items-center justify-between px-8 border-b border-slate-50">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold italic shadow-lg">M</div>
+      <span class="text-xl font-black text-slate-800">MEDCORE</span>
+    </div>
+    <!-- MOBILE CLOSE BUTTON -->
+    <button (click)="sidebarService.close()" class="lg:hidden p-2 text-slate-400 hover:bg-slate-50 rounded-xl">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+</div>
+
+  <nav class="flex-1 px-6 mt-4 space-y-1">
+    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 ml-2 hidden lg:block">Main Menu</p>
+
+    <a [routerLink]="['/admin/dashboard']" routerLinkActive="active-nav"
+      class="active-nav flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+        </path>
+      </svg>
+      <span class="font-semibold text-sm hidden lg:block">Dashboard</span>
+    </a>
+
+    <a [routerLink]="['/admin/doctors']" routerLinkActive="active-nav"
+   [routerLinkActiveOptions]="{exact: true}"
+      class="flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+      </svg>
+      <span class="font-medium text-sm hidden lg:block">Doctors</span>
+    </a>
+
+    <a [routerLink]="['/admin/patients']" routerLinkActive="active-nav"
+   [routerLinkActiveOptions]="{exact: true}"
+      class="flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+        </path>
+      </svg>
+      <span class="font-medium text-sm hidden lg:block">Patient</span>
+    </a>
+
+    <a [routerLink]="['/admin/appointments']" routerLinkActive="active-nav"
+   [routerLinkActiveOptions]="{exact: true}"
+      class="flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+        </path>
+      </svg>
+      <span class="font-medium text-sm hidden lg:block">Appointments</span>
+    </a>
+
+    <a [routerLink]="['/admin/prescriptions']" routerLinkActive="active-nav"
+   [routerLinkActiveOptions]="{exact: true}"
+      class="flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+        </path>
+      </svg>
+      <span class="font-medium text-sm hidden lg:block">Prescriptions</span>
+    </a>
+
+    <a [routerLink]="['/admin/invoices']" routerLinkActive="active-nav"
+   [routerLinkActiveOptions]="{exact: true}"
+      class="flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+        </path>
+      </svg>
+      <span class="font-medium text-sm hidden lg:block">Invoices</span>
+    </a>
+
+    <a [routerLink]="['/admin/settings']" routerLinkActive="active-nav"
+   [routerLinkActiveOptions]="{exact: true}"
+      class="flex items-center gap-4 px-3 py-3 text-slate-500 hover:bg-slate-50 rounded-xl transition-all group">
+      <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+        </path>
+      </svg>
+      <span class="font-medium text-sm hidden lg:block">Settings</span>
+    </a>
+  </nav>
+
+  <div class="p-6">
+    <div class="bg-slate-900 rounded-2xl p-4 hidden lg:block">
+      <p class="text-xs text-slate-400 font-medium">Weekly Goal</p>
+      <div class="flex justify-between items-end mt-2">
+        <p class="text-white font-bold text-lg">84%</p>
+        <p class="text-slate-500 text-[10px]">2,1k / 3k</p>
+      </div>
+      <div class="w-full bg-slate-800 h-1 mt-2 rounded-full overflow-hidden">
+        <div class="bg-indigo-500 h-full w-[84%]"></div>
+      </div>
+    </div>
+  </div>

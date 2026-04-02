@@ -1,0 +1,121 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+  <div
+    class="bg-white p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-shadow duration-500 border border-slate-100 relative overflow-hidden group">
+    <div
+      class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-50 rounded-full group-hover:scale-150 transition-transform duration-700">
+    </div>
+    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-4">Total Prescriptions</p>
+    <div class="flex items-end gap-3">
+      <h2 class="text-4xl font-black text-slate-900">42</h2>
+      <span class="text-emerald-500 text-sm font-bold mb-1"><i class="fa-solid fa-caret-up"></i> 8%</span>
+    </div>
+    <p class="text-slate-400 text-xs mt-4">12 appointments pending</p>
+  </div>
+
+  <div
+    class="bg-white p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-shadow duration-500 border border-slate-100 relative overflow-hidden group">
+    <div
+      class="absolute -right-4 -top-4 w-24 h-24 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-700">
+    </div>
+    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-4">Patient Satisfaction</p>
+    <div class="flex items-end gap-3">
+      <h2 class="text-4xl font-black text-slate-900">98%</h2>
+      <div class="flex text-amber-400 text-xs mb-2">
+        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+          class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+      </div>
+    </div>
+    <p class="text-slate-400 text-xs mt-4">Based on 1.2k reviews</p>
+  </div>
+
+  <div class="bg-[#1e293b] p-8 rounded-[2.5rem] shadow-lg shadow-slate-200 relative overflow-hidden group">
+    <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/5 rounded-full"></div>
+    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest mb-4">Monthly Revenue</p>
+    <div class="flex items-end gap-3">
+      <h2 class="text-4xl font-black text-white">$24,800</h2>
+    </div>
+    <div class="mt-4 w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+      <div class="bg-emerald-400 h-full w-[70%]"></div>
+    </div>
+  </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+  <div class="lg:col-span-8 bg-white rounded-[3rem] shadow-sm border border-slate-50">
+    <div class="flex justify-between items-center mb-5">
+      <h3 class="text-xl font-extrabold tracking-tight">Today's Appointments</h3>
+      <button
+        class="text-xs font-bold text-emerald-600 hover:text-emerald-700 underline decoration-2 underline-offset-8">VIEW
+        SCHEDULE</button>
+    </div>
+
+    <div class="bg-white rounded-[1rem] shadow-sm border border-slate-100 overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-100">
+            <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Patient</th>
+            <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Diagnosis</th>
+            <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Admission</th>
+            <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Status</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          <!-- Row 1 -->
+          <tr class="hover:bg-slate-50/80 transition-colors group">
+            <td class="px-8 py-5">
+              <div class="flex items-center gap-4">
+                <img src="https://i.pravatar.cc/150?u=a"
+                  class="w-11 h-11 rounded-xl object-cover shadow-sm group-hover:scale-105 transition" alt="">
+                <div>
+                  <p class="text-sm font-bold text-slate-900">Adrian Tiller</p>
+                  <p class="text-[11px] text-slate-400 font-medium italic">ID: #8821-A</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-8 py-5 text-sm font-semibold text-slate-600">Hypertension</td>
+            <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 12, 2023</td>
+            <td class="px-8 py-5">
+              <span
+                class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-emerald-50 text-emerald-600 border border-emerald-100">Recovering</span>
+            </td>
+
+          </tr>
+          <!-- Row 2 -->
+          <tr class="hover:bg-slate-50/80 transition-colors group">
+            <td class="px-8 py-5">
+              <div class="flex items-center gap-4">
+                <img src="https://i.pravatar.cc/150?u=b" class="w-11 h-11 rounded-xl object-cover shadow-sm" alt="">
+                <div>
+                  <p class="text-sm font-bold text-slate-900">Selena Gomez</p>
+                  <p class="text-[11px] text-slate-400 font-medium italic">ID: #1029-C</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-8 py-5 text-sm font-semibold text-slate-600">Acute Gastritis</td>
+            <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 14, 2023</td>
+            <td class="px-8 py-5">
+              <span
+                class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-amber-50 text-amber-600 border border-amber-100">
+                Surgery</span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SIDE WIDGET -->
+  <div class="lg:col-span-4 space-y-10">
+    <div
+      class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-[3rem] p-10 text-white shadow-xl shadow-emerald-500/20 relative overflow-hidden">
+      <i class="fa-solid fa-quote-left absolute top-6 right-8 text-white/20 text-4xl"></i>
+      <h3 class="text-xl font-bold mb-4">Patient Note</h3>
+      <p class="text-sm leading-relaxed text-emerald-50 italic">"Dr. Helena is extremely attentive. The surgery went
+        smoother than I ever expected. Her team is world-class."</p>
+      <div class="mt-8 flex items-center gap-3">
+        <div class="w-8 h-1 bg-white/40 rounded-full"></div>
+        <span class="text-xs font-bold uppercase tracking-widest">- Sarah J.</span>
+      </div>
+    </div>
+  </div>
+</div>

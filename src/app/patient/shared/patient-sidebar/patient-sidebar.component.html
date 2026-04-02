@@ -1,0 +1,34 @@
+<aside class="w-24 lg:w-72 glass-sidebar border-r border-slate-200 hidden md:flex flex-col transition-all duration-300">
+  <div class="p-8 flex items-center gap-3">
+    <div
+      class="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 shrink-0">
+      <i class="material-icons text-xl">eco</i>
+    </div>
+    <span class="text-xl font-extrabold tracking-tight text-slate-900 lg:block hidden">Aura Health.</span>
+  </div>
+  <nav class="flex-1 px-6 space-y-2 mt-4">
+    <a [routerLink]="['/patient/dashboard']" routerLinkActive="bg-indigo-600 text-white"
+        [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center gap-4 px-4 py-4 text-slate-400 hover:text-indigo-600 rounded-2xl transition-all">
+      <i class="material-icons text-lg">home</i>
+      <span class="font-bold text-sm lg:block hidden">Dashboard</span>
+    </a>
+    <a [routerLink]="['/patient/appointments/my']" routerLinkActive="bg-indigo-600 text-white"
+        [routerLinkActiveOptions]="{ exact: true }" class="flex items-center gap-4 px-4 py-4 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-2xl transition-all group">
+      <i class="material-icons text-lg">calendar_today</i>
+      <span class="font-bold text-sm lg:block hidden">My Appointments</span>
+    </a>
+    <a [routerLink]="['/patient/doctors']" routerLinkActive="bg-indigo-600 text-white"
+        [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center gap-4 px-4 py-4 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-2xl transition-all group">
+      <i class="material-icons text-lg">person</i>
+      <span class="font-bold text-sm lg:block hidden">Doctors</span>
+    </a>
+    <a [routerLink]="['/patient/prescriptions']" routerLinkActive="bg-indigo-600 text-white"
+        [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center gap-4 px-4 py-4 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-2xl transition-all group">
+      <i class="material-icons text-lg">medication</i>
+      <span class="font-bold text-sm lg:block hidden">Prescriptions</span>
+    </a>
+  </nav>
+</aside>

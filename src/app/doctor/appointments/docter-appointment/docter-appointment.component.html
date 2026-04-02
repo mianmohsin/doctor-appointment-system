@@ -1,0 +1,200 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Appointment</h1>
+  </div>
+  <div class="flex gap-4 items-center">
+
+    <div
+      class="flex flex-wrap items-center justify-between bg-white p-2 rounded-3xl shadow-sm border border-slate-100">
+      <div class="relative flex-1 min-w-[300px] mr-4">
+        <i class="material-icons absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-md">search</i>
+        <input type="text" placeholder="Search by name or ID..."
+          class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-2xl text-sm italic focus:bg-white transition-all">
+      </div>
+      <div class="flex gap-2">
+        <div class="relative inline-block">
+
+          <!-- Filter Button -->
+          <button (click)="toggleFilter()"
+            class="px-3 py-2 bg-white flex items-center border border-slate-100 rounded-2xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
+
+            <span class="material-icons mr-2">filter_list</span>
+            Filters
+          </button>
+
+          <!-- Dropdown -->
+          <div *ngIf="isFilterOpen"
+            class="absolute right-0 mt-3 w-72 bg-white border border-slate-100 rounded-2xl shadow-lg p-4 z-50">
+
+            <h3 class="text-sm font-semibold mb-3 text-slate-700">Filter Options</h3>
+
+            <!-- Status -->
+            <div class="mb-3">
+              <label class="text-xs text-slate-500 block mb-1">Status</label>
+              <select class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+                <option>All</option>
+                <option>Active</option>
+                <option>Pending</option>
+                <option>Completed</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-3">
+              <label class="text-xs text-slate-500 block mb-1">Date</label>
+              <input type="date" class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-2 mt-4">
+              <button class="px-3 py-2 text-xs rounded-lg bg-slate-100 hover:bg-slate-200">
+                Reset
+              </button>
+              <button class="px-3 py-2 text-xs rounded-lg bg-teal-600 text-white hover:bg-teal-700">
+                Apply
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <button (click)="bookAppointment(1)"
+    class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all flex items-center gap-2">
+    <i class="fa-solid fa-plus"></i> Create Appointment
+  </button>
+  </div>
+</header>
+<div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="bg-slate-100">
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Patient</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Diagnosis</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Admission</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Phone</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Status</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-50">
+      <!-- Row 1 -->
+      <tr class="hover:bg-slate-50/80 transition-colors group">
+        <td class="px-8 py-5">
+          <div class="flex items-center gap-4">
+            <img src="https://i.pravatar.cc/150?u=a"
+              class="w-11 h-11 rounded-xl object-cover shadow-sm group-hover:scale-105 transition" alt="">
+            <div>
+              <p class="text-sm font-bold text-slate-900">Adrian Tiller</p>
+              <p class="text-[11px] text-slate-400 font-medium italic">ID: #8821-A</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">Hypertension</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 12, 2023</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">0392 479971s</td>
+        <td class="px-8 py-5">
+          <span
+            class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-emerald-50 text-emerald-600 border border-emerald-100">Recovering</span>
+        </td>
+        <td class="px-8 py-5 text-center">
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">edit</i>
+          </button>
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">visibility</i>
+          </button>
+          <button class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+      <!-- Row 2 -->
+      <tr class="hover:bg-slate-50/80 transition-colors group">
+        <td class="px-8 py-5">
+          <div class="flex items-center gap-4">
+            <img src="https://i.pravatar.cc/150?u=b" class="w-11 h-11 rounded-xl object-cover shadow-sm" alt="">
+            <div>
+              <p class="text-sm font-bold text-slate-900">Selena Gomez</p>
+              <p class="text-[11px] text-slate-400 font-medium italic">ID: #1029-C</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">Acute Gastritis</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 14, 2023</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">0392 479971s</td>
+        <td class="px-8 py-5">
+          <span
+            class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-amber-50 text-amber-600 border border-amber-100">In
+            Surgery</span>
+        </td>
+        <td class="px-8 py-5 text-center">
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">edit</i>
+          </button>
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">visibility</i>
+          </button>
+          <button class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+      <!-- Row 3 -->
+      <tr class="hover:bg-slate-50/80 transition-colors group">
+        <td class="px-8 py-5">
+          <div class="flex items-center gap-4">
+            <div
+              class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs uppercase shadow-sm">
+              MK</div>
+            <div>
+              <p class="text-sm font-bold text-slate-900">Marcus King</p>
+              <p class="text-[11px] text-slate-400 font-medium italic">ID: #4412-B</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">Diabetes Type II</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 15, 2023</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">0392 479971s</td>
+        <td class="px-8 py-5">
+          <span
+            class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-blue-50 text-blue-600 border border-blue-100">Observation</span>
+        </td>
+        <td class="px-8 py-5 text-center">
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">edit</i>
+          </button>
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">visibility</i>
+          </button>
+          <button class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Pagination -->
+  <div class="p-8 bg-slate-50/30 flex justify-between items-center border-t border-slate-50">
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Showing 3 of 42 Patients</p>
+    <div class="flex gap-2">
+      <button
+        class="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white transition"><i
+          class="material-icons text-md">chevron_left</i></button>
+      <button
+        class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs font-bold shadow-lg shadow-slate-900/20">1</button>
+      <button
+        class="w-10 h-10 rounded-xl bg-white-900 text-slate flex items-center justify-center text-xs font-bold shadow-lg shadow-slate-900/20">2</button>
+      <button
+        class="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white transition"><i
+          class="material-icons text-md">chevron_right</i></button>
+    </div>
+  </div>
+</div>

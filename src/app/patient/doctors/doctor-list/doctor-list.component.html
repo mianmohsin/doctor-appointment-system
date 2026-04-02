@@ -1,0 +1,180 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Doctors</h1>
+  </div>
+  <div
+    class="flex flex-wrap gap-4 items-center justify-between bg-white p-2 rounded-3xl shadow-sm border border-slate-100 mt-5">
+    <div class="relative flex-1 min-w-[300px]">
+      <i class="material-icons absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-md">search</i>
+      <input type="text" placeholder="Search by name or ID..."
+        class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-2xl text-sm italic focus:bg-white transition-all">
+    </div>
+    <div class="flex gap-2">
+      <div class="relative inline-block">
+
+        <!-- Filter Button -->
+        <button (click)="toggleFilter()"
+          class="px-5 py-3 bg-white flex items-center border border-slate-100 rounded-2xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
+
+          <span class="material-icons mr-2">filter_list</span>
+          Filters
+        </button>
+
+        <!-- Dropdown -->
+        <div *ngIf="isFilterOpen"
+          class="absolute right-0 mt-3 w-72 bg-white border border-slate-100 rounded-2xl shadow-lg p-4 z-50">
+          <h3 class="text-sm font-semibold mb-3 text-slate-700">Filter Options</h3>
+
+          <!-- Status -->
+          <div class="mb-3">
+            <label class="text-xs text-slate-500 block mb-1">Status</label>
+            <select class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+              <option>All</option>
+              <option>Active</option>
+              <option>Pending</option>
+              <option>Completed</option>
+            </select>
+          </div>
+
+          <!-- Date -->
+          <div class="mb-3">
+            <label class="text-xs text-slate-500 block mb-1">Date</label>
+            <input type="date" class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex justify-end gap-2 mt-4">
+            <button class="px-3 py-2 text-xs rounded-lg bg-slate-100 hover:bg-slate-200">
+              Reset
+            </button>
+            <button class="px-3 py-2 text-xs rounded-lg bg-teal-600 text-white hover:bg-teal-700">
+              Apply
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <!-- Doctor Card 1 -->
+  <div
+    class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-xl hover:scale-[1.01] transition-all duration-300 group">
+    <div class="flex items-center gap-6">
+      <!-- Modern Initial Avatar -->
+      <div
+        class="w-20 h-20 bg-gradient-to-br from-slate-50 to-slate-100 rounded-[2rem] flex items-center justify-center text-2xl font-black text-slate-400 shadow-inner group-hover:from-indigo-50 group-hover:to-indigo-100 group-hover:text-indigo-400 transition-colors">
+        DO
+      </div>
+      <div>
+        <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">Dr. Ahmed Khan
+        </h3>
+        <p class="text-sm font-medium text-slate-400">Cardiologist</p>
+        <div class="flex items-center gap-2 mt-2">
+          <i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
+          <span class="text-xs font-bold text-slate-700">4.8</span>
+          <span class="text-[10px] text-slate-400 font-medium">(120 reviews)</span>
+        </div>
+        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-3 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Available: Mon - Fri
+        </p>
+      </div>
+    </div>
+    <button
+      class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg shadow-[#1E7E8C]/20 transition-all active:scale-95">
+      Book Appointment
+    </button>
+  </div>
+
+  <!-- Doctor Card 2 (Repeated for Preview) -->
+  <div
+    class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-xl hover:scale-[1.01] transition-all duration-300 group">
+    <div class="flex items-center gap-6">
+      <div
+        class="w-20 h-20 bg-gradient-to-br from-slate-50 to-slate-100 rounded-[2rem] flex items-center justify-center text-2xl font-black text-slate-400 shadow-inner group-hover:from-indigo-50 group-hover:to-indigo-100 group-hover:text-indigo-400 transition-colors">
+        DO
+      </div>
+      <div>
+        <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">Dr. Sarah Miller
+        </h3>
+        <p class="text-sm font-medium text-slate-400">Pediatrician</p>
+        <div class="flex items-center gap-2 mt-2">
+          <i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
+          <span class="text-xs font-bold text-slate-700">4.9</span>
+          <span class="text-[10px] text-slate-400 font-medium">(84 reviews)</span>
+        </div>
+        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-3 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Available: Mon - Sat
+        </p>
+      </div>
+    </div>
+    <button
+      class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg shadow-[#1E7E8C]/20 transition-all active:scale-95">
+      Book Appointment
+    </button>
+  </div>
+
+  <!-- Doctor Card 3 -->
+  <div
+    class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-xl hover:scale-[1.01] transition-all duration-300 group">
+    <div class="flex items-center gap-6">
+      <div
+        class="w-20 h-20 bg-gradient-to-br from-slate-50 to-slate-100 rounded-[2rem] flex items-center justify-center text-2xl font-black text-slate-400 shadow-inner group-hover:from-indigo-50 group-hover:to-indigo-100 group-hover:text-indigo-400 transition-colors">
+        DO
+      </div>
+      <div>
+        <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">Dr. Marcus King
+        </h3>
+        <p class="text-sm font-medium text-slate-400">Neurologist</p>
+        <div class="flex items-center gap-2 mt-2">
+          <i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
+          <span class="text-xs font-bold text-slate-700">4.7</span>
+          <span class="text-[10px] text-slate-400 font-medium">(210 reviews)</span>
+        </div>
+        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-3 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Available: Tue - Fri
+        </p>
+      </div>
+    </div>
+    <button
+      class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg shadow-[#1E7E8C]/20 transition-all active:scale-95">
+      Book Appointment
+    </button>
+  </div>
+
+  <!-- Doctor Card 4 -->
+  <div
+    class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-xl hover:scale-[1.01] transition-all duration-300 group">
+    <div class="flex items-center gap-6">
+      <div
+        class="w-20 h-20 bg-gradient-to-br from-slate-50 to-slate-100 rounded-[2rem] flex items-center justify-center text-2xl font-black text-slate-400 shadow-inner group-hover:from-indigo-50 group-hover:to-indigo-100 group-hover:text-indigo-400 transition-colors">
+        DO
+      </div>
+      <div>
+        <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">Dr. Elena Silva
+        </h3>
+        <p class="text-sm font-medium text-slate-400">Dermatologist</p>
+        <div class="flex items-center gap-2 mt-2">
+          <i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
+          <span class="text-xs font-bold text-slate-700">4.9</span>
+          <span class="text-[10px] text-slate-400 font-medium">(155 reviews)</span>
+        </div>
+        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-3 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Available: Mon - Thu
+        </p>
+      </div>
+    </div>
+    <button
+      class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg shadow-[#1E7E8C]/20 transition-all active:scale-95">
+      Book Appointment
+    </button>
+  </div>
+
+</div>

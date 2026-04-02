@@ -1,0 +1,20 @@
+@media print {
+  /* Hide the entire dashboard and only show the modal content */
+  body > *:not(app-root),
+  .sidebar,
+  .top-nav,
+  .main-content-bg {
+    display: none !important;
+  }
+
+  /* Reset body background to white for printing */
+  body {
+    background-color: white !important;
+  }
+  .printButton, .closeicon, .backdrop{
+    display: none;
+  }
+  .printshadow{
+    box-shadow: none;
+  }
+}

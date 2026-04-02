@@ -1,0 +1,30 @@
+<div class="p-8">
+  <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-emerald-400 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <span class="material-icons text-white text-xl">eco</span>
+      </div>
+      <span class="text-xl font-medium tracking-tight text-white italic">Aura Health</span>
+  </div>
+</div>
+
+<nav class="flex-1 px-6 mt-4 space-y-2 my-6 text-sm">
+  <a [routerLink]="['/doctor']" routerLinkActive="bg-white/10" class="flex items-center gap-4 px-6 py-4 text-gray-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all group">
+    <span class="material-icons mr-3">dashboard</span>
+    Dashboard
+  </a>
+
+  <a [routerLink]="['/doctor/appointments']" routerLinkActive="bg-white/10" class="flex items-center gap-4 px-6 py-4 text-slate-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all group">
+    <span class="material-icons mr-3">event_available</span>
+    Appointments
+  </a>
+
+  <a [routerLink]="['/doctor/schedule']" routerLinkActive="bg-white/10" class="flex items-center gap-4 px-6 py-4 text-slate-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all group">
+    <span class="material-icons mr-3">schedule</span>
+    Schedule
+  </a>
+
+  <a [routerLink]="['/doctor/prescriptions']" routerLinkActive="bg-white/10" class="flex items-center gap-4 px-6 py-4 text-slate-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all group">
+    <span class="material-icons mr-3">assignment</span>
+    Prescriptions
+  </a>
+</nav>

@@ -1,0 +1,18 @@
+<div class="flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-72 sidebar-gradient hidden lg:flex flex-col m-4 rounded-[2.5rem] shadow-2xl">
+    <app-doctor-sidebar></app-doctor-sidebar>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 overflow-y-auto px-8 py-8">
+    <app-doctor-header></app-doctor-header>
+
+    <!-- Dynamic Content -->
+    <main class="flex-1 px-0 overflow-y-auto">
+      <router-outlet></router-outlet>
+    </main>
+  </main>
+
+</div>

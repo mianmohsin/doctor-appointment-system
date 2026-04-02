@@ -1,0 +1,341 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Prescription</h1>
+  </div>
+  <div class="flex items-center gap-4">
+
+    <div class="flex flex-wrap items-center justify-between bg-white p-2 rounded-3xl shadow-sm border border-slate-100">
+      <div class="relative flex-1 min-w-[300px] mr-4">
+        <i class="material-icons absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-md">search</i>
+        <input type="text" placeholder="Search by name or ID..."
+          class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-2xl text-sm italic focus:bg-white transition-all">
+      </div>
+      <div class="flex gap-2">
+        <div class="relative inline-block">
+
+          <!-- Filter Button -->
+          <button (click)="toggleFilter()"
+            class="px-3 py-2 bg-white flex items-center border border-slate-100 rounded-2xl text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
+
+            <span class="material-icons mr-2">filter_list</span>
+            Filters
+          </button>
+
+          <!-- Dropdown -->
+          <div *ngIf="isFilterOpen"
+            class="absolute right-0 mt-3 w-72 bg-white border border-slate-100 rounded-2xl shadow-lg p-4 z-50">
+
+            <h3 class="text-sm font-semibold mb-3 text-slate-700">Filter Options</h3>
+
+            <!-- Status -->
+            <div class="mb-3">
+              <label class="text-xs text-slate-500 block mb-1">Status</label>
+              <select class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+                <option>All</option>
+                <option>Active</option>
+                <option>Pending</option>
+                <option>Completed</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="mb-3">
+              <label class="text-xs text-slate-500 block mb-1">Date</label>
+              <input type="date" class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-2 mt-4">
+              <button class="px-3 py-2 text-xs rounded-lg bg-slate-100 hover:bg-slate-200">
+                Reset
+              </button>
+              <button class="px-3 py-2 text-xs rounded-lg bg-teal-600 text-white hover:bg-teal-700">
+                Apply
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <button (click)="bookAppointment(1)"
+      class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all flex items-center gap-2">
+      <i class="fa-solid fa-plus"></i> Create Prescription
+    </button>
+  </div>
+</header>
+<div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden mt-5">
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="bg-slate-100">
+        <th class="px-8 w-10 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">ID</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Patient</th>
+        <th class="px-8 w-50 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Diagnosis (Brief)
+        </th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Date</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Phone</th>
+        <th class="px-8 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Action</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-50">
+      <!-- Row 1 -->
+      <tr class="hover:bg-slate-50/80 transition-colors group">
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">1</td>
+        <td class="px-8 py-5">
+          <div class="flex items-center gap-4">
+            <div>
+              <p class="text-sm font-bold text-slate-900">Adrian Tiller</p>
+              <p class="text-[11px] text-slate-400 font-medium italic">ID: #8821-A</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">Hypertension</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 12, 2023</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">0392 479971s</td>
+        <td class="px-8 py-5">
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">edit</i>
+          </button>
+          <button (click)="printPrescription()"
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">visibility</i>
+          </button>
+          <button class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">delete</i>
+          </button>
+
+        </td>
+      </tr>
+      <tr class="hover:bg-slate-50/80 transition-colors group">
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">2</td>
+        <td class="px-8 py-5">
+          <div class="flex items-center gap-4">
+            <div>
+              <p class="text-sm font-bold text-slate-900">Selena Gomez</p>
+              <p class="text-[11px] text-slate-400 font-medium italic">ID: #1029-C</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-8 py-5 text-sm font-semibold text-slate-600">Acute Gastritis</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">Oct 14, 2023</td>
+        <td class="px-8 py-5 text-sm text-slate-500 font-medium">0392 479971s</td>
+        <td class="px-8 py-5">
+          <button
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">edit</i>
+          </button>
+          <button (click)="printPrescription()"
+            class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">visibility</i>
+          </button>
+          <button class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+            <i class="material-icons">delete</i>
+          </button>
+
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div id="prescriptionprint" class="prescription-page print-container" style="display:none">
+    <!-- Watermark -->
+    <div style="position:absolute; top:50%; left:40%; transform:translate(-40%, -50%);
+            font-size:50px; font-weight:900; color:rgba(0,0,0,0.05);
+            text-transform:uppercase; pointer-events:none; z-index:0;">
+      Aura Health
+    </div>
+
+    <!-- HEADER -->
+    <header
+      style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #10b981; padding-bottom:32px; margin-bottom:20px;">
+      <div style="display:flex; gap:16px; align-items:center;">
+        <div
+          style="width:64px; height:64px; background-color:#10b981; border-radius:16px; display:flex; align-items:center; justify-content:center; color:white; font-size:24px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+          A</div>
+        <div>
+          <h1 style="font-size:24px; font-weight:800; color:#1e293b; margin:0;">AURA HEALTH CLINIC</h1>
+          <p style="font-size:12px; font-weight:700; color:#10b981; text-transform:uppercase; margin:2px 0;">Premium
+            Care Center</p>
+          <p style="font-size:10px; color:#64748b; margin-top:4px; line-height:1.2;">
+            122 Medical Drive, Suite 400<br>
+            San Francisco, CA 94103
+          </p>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <h2 style="font-size:18px; font-weight:800; color:#1e293b; margin:0;">Dr. Helena Silva</h2>
+        <p style="font-size:10px; font-weight:700; font-style:italic; color:#64748b; margin:2px 0;">Senior Consultant
+          Surgeon</p>
+        <p style="font-size:10px; color:#94a3b8; margin-top:4px;">Registration: PMC-988210</p>
+        <p style="font-size:10px; color:#94a3b8;">Phone: +1 (555) 012-3456</p>
+      </div>
+    </header>
+
+    <!-- PATIENT INFO -->
+    <div
+      style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; background-color:#f1f5f9; border:1px solid #f1f5f9; border-radius:16px; padding:24px; margin-bottom:32px;">
+      <div>
+        <p style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; letter-spacing:1px;">Patient
+          Name</p>
+        <p style="font-size:14px; font-weight:700; color:#1e293b;">Adrian Tiller</p>
+      </div>
+      <div>
+        <p style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; letter-spacing:1px;">Age /
+          Gender</p>
+        <p style="font-size:14px; font-weight:700; color:#1e293b;">32 Y / Male</p>
+      </div>
+      <div>
+        <p style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; letter-spacing:1px;">Weight
+        </p>
+        <p style="font-size:14px; font-weight:700; color:#1e293b;">78 Kg</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; letter-spacing:1px;">Date
+        </p>
+        <p style="font-size:14px; font-weight:700; color:#1e293b;">24 Oct 2024</p>
+      </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <div style="display:flex; flex:1 1 auto; gap:40px; z-index:10;">
+
+      <!-- Sidebar: Vitals & Diagnosis -->
+      <div
+        style="width:33.3333%; border-right:1px solid #e2e8f0; padding-right:24px; display:flex; flex-direction:column; gap:32px;">
+
+        <!-- Vitals -->
+        <div>
+          <h3
+            style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.2em; margin-bottom:12px;">
+            Vitals
+          </h3>
+          <ul
+            style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; font-size:12px; font-weight:500; color:#475569;">
+            <li style="display:flex; justify-content:space-between;"><span>BP:</span> <span
+                style="font-weight:700; color:#0f172a;">120/80 mmHg</span></li>
+            <li style="display:flex; justify-content:space-between;"><span>Pulse:</span> <span
+                style="font-weight:700; color:#0f172a;">72 bpm</span></li>
+            <li style="display:flex; justify-content:space-between;"><span>Temp:</span> <span
+                style="font-weight:700; color:#0f172a;">98.6 °F</span></li>
+            <li style="display:flex; justify-content:space-between;"><span>SpO2:</span> <span
+                style="font-weight:700; color:#0f172a;">99%</span></li>
+          </ul>
+        </div>
+
+        <!-- Diagnosis -->
+        <div>
+          <h3
+            style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; letter-spacing:0.2em; margin-bottom:12px;">
+            Diagnosis
+          </h3>
+          <p style="font-size:12px; line-height:1.4; color:#475569; font-weight:500; margin:0;">
+            Acute Nasopharyngitis with secondary symptoms of Hypertension. Patient reports mild fatigue and headaches
+            over the last 3 days.
+          </p>
+        </div>
+
+        <!-- QR -->
+        <div style="padding-top:40px;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://aurahealth.com/verify/8821"
+            style="width:80px; height:80px; opacity:0.3; display:block;" alt="Verification QR">
+          <p style="font-size:8px; color:#94a3b8; margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">
+            Scan to verify digital record
+          </p>
+        </div>
+      </div>
+
+      <!-- Main: Medications -->
+      <div style="width:66.6667%;">
+        <div style="font-size:32px; font-weight:900; margin-bottom:16px;">Rx</div>
+
+        <!-- MEDICATION TABLE -->
+        <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+          <thead>
+            <tr style="text-align:left; border-bottom:1px solid #e2e8f0;">
+              <th style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; padding-bottom:8px;">
+                Medication & Strength</th>
+              <th style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; padding-bottom:8px;">
+                Frequency</th>
+              <th
+                style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; text-align:right; padding-bottom:8px;">
+                Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:12px 0; font-size:14px; font-weight:800; color:#1e293b;">Amoxicillin 500mg</td>
+              <td style="padding:12px 0;">1-0-1</td>
+              <td style="padding:12px 0; text-align:right;">5 Days</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0; font-size:14px; font-weight:800; color:#1e293b;">Paracetamol 650mg</td>
+              <td style="padding:12px 0;">SOS</td>
+              <td style="padding:12px 0; text-align:right;">3 Days</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Advice -->
+        <div
+          style="margin-top:40px; padding:24px; background-color:#f1f5f9; border-radius:24px; border:1px dashed #e2e8f0;">
+          <h4
+            style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; letter-spacing:0.2em; margin-bottom:8px;">
+            Advice / Instructions
+          </h4>
+          <ul
+            style="font-size:11px; color:#475569; font-weight:500; margin:0; padding-left:20px; list-style:disc; display:flex; flex-direction:column; gap:4px;">
+            <li>Increase fluid intake to 3L per day.</li>
+            <li>Avoid oily and spicy food for 1 week.</li>
+            <li>Rest for 48 hours; avoid heavy physical activity.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer
+      style="margin-top:auto; padding-top:40px; border-top:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:flex-end;">
+      <div>
+        <p
+          style="font-size:10px; font-weight:900; color:#94a3b8; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">
+          Follow up
+        </p>
+        <p style="font-size:14px; font-weight:700; color:#0f172a; margin:0;">
+          In 07 Days (31 Oct 2024)
+        </p>
+      </div>
+      <div style="text-align:center;">
+        <!-- Signature Area -->
+        <div style="margin-bottom:8px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Jon_Kirsch_Signature.png"
+            style="width:128px; height:48px; object-fit:contain; display:block; margin:0 auto; mix-blend-mode:multiply; opacity:0.8;"
+            alt="Signature">
+        </div>
+        <div style="width:192px; border-top:2px solid #0f172a; margin:0 auto;"></div>
+        <p style="font-size:12px; font-weight:700; color:#0f172a; margin-top:8px; font-style:italic;">
+          Dr. Helena Silva
+        </p>
+        <p style="font-size:9px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.1em; margin:0;">
+          Authorized Signatory
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Pagination -->
+  <div class="p-8 bg-slate-50/30 flex justify-between items-center border-t border-slate-50">
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Showing 3 of 42 Patients</p>
+    <div class="flex gap-2">
+      <button
+        class="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white transition"><i
+          class="material-icons text-md">chevron_left</i></button>
+      <button
+        class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs font-bold shadow-lg shadow-slate-900/20">1</button>
+      <button
+        class="w-10 h-10 rounded-xl bg-white-900 text-slate flex items-center justify-center text-xs font-bold shadow-lg shadow-slate-900/20">2</button>
+      <button
+        class="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white transition"><i
+          class="material-icons text-md">chevron_right</i></button>
+    </div>
+  </div>

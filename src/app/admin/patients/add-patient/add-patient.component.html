@@ -1,0 +1,103 @@
+<div class="p-8 bg-[#f8fafc] min-h-screen">
+
+  <!-- Breadcrumbs / Back Button -->
+  <div class="mb-8 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <button routerLink="/admin/patients" class="p-2 bg-white border border-slate-200 rounded-xl text-slate-500 hover:text-indigo-600 transition-all shadow-sm">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div>
+        <h1 class="text-2xl font-black text-slate-800 tracking-tight">
+          {{ isEditMode ? 'Edit Patient Profile' : 'Register New Patient' }}
+        </h1>
+        <p class="text-slate-500 text-sm italic">ID: {{ patientId || 'New Entry' }}</p>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <button routerLink="/patients" class="px-6 py-3 text-slate-500 font-bold hover:text-slate-800 transition-all">Cancel</button>
+      <button (click)="save()" class="px-8 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+        {{ isEditMode ? 'Update Profile' : 'Create Patient' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-12 gap-8">
+
+    <!-- LEFT COLUMN: Image & Status -->
+    <div class="col-span-12 lg:col-span-4 space-y-6">
+      <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 text-center">
+        <div class="relative w-40 h-40 mx-auto mb-6 group">
+          <img [src]="patientForm.profileImg" class="w-full h-full rounded-[2rem] object-cover border-4 border-slate-50 shadow-md group-hover:opacity-80 transition-all">
+          <label class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-all bg-black/20 rounded-[2rem]">
+            <input type="file" class="hidden">
+            <span class="bg-white p-2 rounded-lg text-xs font-bold text-slate-700 shadow-xl">Change Photo</span>
+          </label>
+        </div>
+
+        <div class="space-y-4">
+           <!-- Account Status Toggle -->
+           <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-black text-slate-400 uppercase tracking-widest">Account Status</span>
+              <button (click)="patientForm.status = (patientForm.status === 'Active' ? 'Blocked' : 'Active')"
+                [ngClass]="patientForm.status === 'Active' ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600'"
+                class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase transition-all">
+                {{ patientForm.status }}
+              </button>
+           </div>
+
+           <!-- Admin destructive action -->
+           <button *ngIf="isEditMode" (click)="resetPassword()" class="w-full py-4 text-rose-500 font-bold text-xs uppercase tracking-widest border-2 border-dashed border-rose-100 rounded-2xl hover:bg-rose-50 hover:border-rose-200 transition-all">
+              Force Password Reset
+           </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Form Fields -->
+    <div class="col-span-12 lg:col-span-8">
+      <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100">
+        <h3 class="text-lg font-bold text-slate-800 mb-8 pb-4 border-b border-slate-50">General Information</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Name -->
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Full Name</label>
+            <input type="text" [(ngModel)]="patientForm.name" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
+          </div>
+
+          <!-- Email -->
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Email Address</label>
+            <input type="email" [(ngModel)]="patientForm.email" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
+          </div>
+
+          <!-- Phone -->
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Phone Number</label>
+            <input type="text" [(ngModel)]="patientForm.phone" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
+          </div>
+
+          <!-- Extra Admin Field Example -->
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</label>
+            <select class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
+              <option value="">Select</option>
+              <option value="">Active</option>
+              <option value="">Inative</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-indigo-50 rounded-[2rem] border border-indigo-100 flex items-center gap-4">
+          <div class="bg-white p-2 rounded-xl text-indigo-600 shadow-sm">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <p class="text-xs text-indigo-700 leading-relaxed">
+            As an <strong>Administrator</strong>, you are modifying core account identity. Medical records and appointment history are not affected by changes to basic contact information.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

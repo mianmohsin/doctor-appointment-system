@@ -1,0 +1,148 @@
+<div class="p-6 md:p-10 bg-[#f8fafc] min-h-screen">
+
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+    <div class="flex items-center gap-4">
+      <button routerLink="/admin/invoices" class="p-3 bg-white border border-slate-200 rounded-2xl text-slate-400 hover:text-indigo-600 transition-all shadow-sm">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div>
+        <h1 class="text-3xl font-black text-slate-800 tracking-tight">Create Invoice</h1>
+        <p class="text-slate-400 text-sm font-medium">Drafting {{invoice.number}}</p>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <button class="px-6 py-3 text-slate-500 font-bold hover:text-slate-800">Save as Draft</button>
+      <button (click)="saveInvoice()" class="px-8 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all">
+        Finalize & Send
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-12 gap-8">
+
+    <!-- LEFT: Billing Items -->
+    <div class="col-span-12 lg:col-span-8 space-y-8">
+
+      <!-- Basic Details Card -->
+      <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6">General Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="space-y-2">
+            <label class="text-[11px] font-bold text-slate-500 uppercase ml-1">Invoice Number</label>
+            <input type="text" [(ngModel)]="invoice.number" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-3.5 font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-50 transition-all">
+          </div>
+          <div class="space-y-2">
+            <label class="text-[11px] font-bold text-slate-500 uppercase ml-1">Issue Date</label>
+            <input type="date" [(ngModel)]="invoice.date" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-3.5 font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-50 transition-all">
+          </div>
+          <div class="space-y-2">
+            <label class="text-[11px] font-bold text-slate-500 uppercase ml-1">Due Date</label>
+            <input type="date" [(ngModel)]="invoice.dueDate" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-3.5 font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-50 transition-all">
+          </div>
+        </div>
+      </div>
+
+      <!-- Items List Card -->
+      <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Billing Services & Items</h3>
+          <button (click)="addItem()" class="text-xs font-black text-indigo-600 bg-indigo-50 px-4 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-all">
+            + Add New Item
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Item Header (Desktop) -->
+          <div class="hidden md:grid grid-cols-12 gap-4 px-4 text-[10px] font-black text-slate-400 uppercase">
+            <div class="col-span-6">Description / Service Name</div>
+            <div class="col-span-2">Qty</div>
+            <div class="col-span-2">Price ($)</div>
+            <div class="col-span-2 text-right">Total</div>
+          </div>
+
+          <!-- Dynamic Item Rows -->
+          <div *ngFor="let item of items; let i = index" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-slate-50/50 p-4 rounded-2xl group transition-all hover:bg-white hover:shadow-md hover:ring-1 hover:ring-slate-100">
+            <div class="col-span-12 md:col-span-6">
+              <input type="text" [(ngModel)]="item.description" placeholder="Service name..." class="w-full bg-transparent border-none font-bold text-slate-700 focus:ring-0 outline-none">
+            </div>
+            <div class="col-span-4 md:col-span-2">
+              <input type="number" [(ngModel)]="item.qty" (input)="updateItemTotal(item)" class="w-full bg-white md:bg-transparent border border-slate-100 md:border-none rounded-lg px-2 py-1 font-bold text-slate-700 text-center">
+            </div>
+            <div class="col-span-4 md:col-span-2">
+              <input type="number" [(ngModel)]="item.price" (input)="updateItemTotal(item)" class="w-full bg-white md:bg-transparent border border-slate-100 md:border-none rounded-lg px-2 py-1 font-bold text-slate-700 text-center">
+            </div>
+            <div class="col-span-3 md:col-span-1 text-right font-black text-slate-800">
+              ${{item.total}}
+            </div>
+            <div class="col-span-1 text-right">
+              <button (click)="removeItem(i)" class="text-slate-300 hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Summary & Recipient -->
+    <div class="col-span-12 lg:col-span-4 space-y-8">
+
+      <!-- Recipient Selection -->
+      <div class="bg-indigo-900 rounded-[2.5rem] p-8 shadow-xl text-white">
+        <h3 class="text-[10px] font-black text-indigo-300 uppercase tracking-[0.2em] mb-6">Patient Recipient</h3>
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <select [(ngModel)]="invoice.patientId" class="w-full bg-white/10 border-none rounded-2xl px-5 py-4 font-bold text-white outline-none focus:ring-2 focus:ring-white/20 backdrop-blur-md">
+              <option value="" disabled>Select Patient...</option>
+              <option value="1">Muhammad Mohsin</option>
+              <option value="2">Ali Khan</option>
+            </select>
+          </div>
+
+          <div class="pt-6 border-t border-white/10 text-center">
+            <p class="text-[10px] font-bold text-indigo-300 uppercase tracking-widest mb-1">Assigned Doctor</p>
+            <p class="font-bold">Dr. Alexander Thorne</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Calculation -->
+      <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-8">Invoice Summary</h3>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex justify-between text-sm font-bold text-slate-500">
+            <span>Subtotal</span>
+            <span class="text-slate-800">${{getSubtotal()}}</span>
+          </div>
+          <div class="flex justify-between text-sm font-bold text-slate-500">
+            <span>Tax ({{invoice.tax}}%)</span>
+            <span class="text-slate-800">+ ${{getTaxAmount()}}</span>
+          </div>
+          <div class="flex justify-between items-center text-sm font-bold text-slate-500">
+            <span>Discount ($)</span>
+            <input type="number" [(ngModel)]="invoice.discount" class="w-20 bg-slate-50 border-none rounded-lg px-2 py-1 text-right font-black text-indigo-600 outline-none">
+          </div>
+        </div>
+
+        <div class="bg-slate-900 rounded-2xl p-6 text-white flex justify-between items-center shadow-lg shadow-slate-200">
+          <div>
+            <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Grand Total</p>
+            <p class="text-3xl font-black tracking-tighter">${{getGrandTotal()}}</p>
+          </div>
+          <div class="p-3 bg-white/10 rounded-xl">
+             <svg class="w-6 h-6 text-indigo-300" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+        <label class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 block">Invoice Notes</label>
+        <textarea [(ngModel)]="invoice.notes" rows="3" placeholder="Payment terms, bank details, or extra info..." class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-sm font-medium text-slate-600 outline-none resize-none focus:ring-4 focus:ring-indigo-50"></textarea>
+      </div>
+
+    </div>
+  </div>
+</div>

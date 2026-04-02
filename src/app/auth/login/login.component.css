@@ -1,0 +1,5 @@
+@media (min-width: 640px) {
+    .sm\:max-w-lg {
+        width: 28rem;
+    }
+}

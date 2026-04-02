@@ -1,0 +1,106 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">My Appointments</h1>
+  </div>
+  <button (click)="bookAppointment(1)"
+    class="bg-indigo-600 hover:bg-indigo-500  text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-slate-900/20 transition-all flex items-center gap-2">
+    Create Appointment
+  </button>
+</header>
+
+<!-- MODERN TABLE CONTAINER -->
+<div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden transition-all">
+  <table class="w-full text-left border-collapse">
+      <thead>
+          <tr class="bg-slate-50/50">
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">ID</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">Doctor</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">Payment</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">Date & Time</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">Status</th>
+              <th class="px-8 py-6 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 text-center">Action</th>
+          </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-50">
+          <!-- Row 1 -->
+          <tr class="hover:bg-slate-50/50 transition-colors group">
+              <td class="px-8 py-5 text-sm font-bold text-slate-400">01</td>
+              <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                      <img src="https://i.pravatar.cc/150?u=john" class="w-10 h-10 rounded-xl object-cover shadow-sm group-hover:scale-105 transition" alt="Doctor">
+                      <div>
+                          <p class="text-sm font-bold text-slate-900">Dr. John Doe</p>
+                          <p class="text-[11px] text-slate-400 font-medium italic">ID: #102</p>
+                      </div>
+                  </div>
+              </td>
+              <td class="px-8 py-5">
+                  <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">Online</span>
+              </td>
+              <td class="px-8 py-5">
+                  <p class="text-sm font-bold text-slate-700">Oct 24, 2024</p>
+                  <p class="text-[11px] text-slate-400">10:30 AM</p>
+              </td>
+              <td class="px-8 py-5">
+                  <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-amber-50 text-amber-600 border border-amber-100 shadow-sm shadow-amber-100/20">
+                      Pending
+                  </span>
+              </td>
+              <td class="px-8 py-5">
+                  <div class="flex justify-center gap-2">
+                      <button class="w-9 h-9 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-white hover:shadow-md transition-all flex items-center justify-center border border-transparent hover:border-slate-100">
+                          <i class="material-icons text-sm">edit</i>
+                      </button>
+                      <button class="w-9 h-9 rounded-xl bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-white hover:shadow-md transition-all flex items-center justify-center border border-transparent hover:border-slate-100">
+                          <i class="material-icons text-sm">delete</i>
+                      </button>
+                  </div>
+              </td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr class="hover:bg-slate-50/50 transition-colors group">
+              <td class="px-8 py-5 text-sm font-bold text-slate-400">02</td>
+              <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                      <img src="https://i.pravatar.cc/150?u=jane" class="w-10 h-10 rounded-xl object-cover shadow-sm group-hover:scale-105 transition" alt="Doctor">
+                      <div>
+                          <p class="text-sm font-bold text-slate-900">Dr. Jane Smith</p>
+                          <p class="text-[11px] text-slate-400 font-medium italic">ID: #105</p>
+                      </div>
+                  </div>
+              </td>
+              <td class="px-8 py-5">
+                  <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-lg">Cash</span>
+              </td>
+              <td class="px-8 py-5">
+                  <p class="text-sm font-bold text-slate-700">Oct 24, 2024</p>
+                  <p class="text-[11px] text-slate-400">10:30 AM</p>
+              </td>
+              <td class="px-8 py-5">
+                  <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm shadow-emerald-100/20">
+                      Confirmed
+                  </span>
+              </td>
+              <td class="px-8 py-5">
+                  <div class="flex justify-center gap-2">
+                      <button class="w-9 h-9 rounded-xl bg-slate-50 text-slate-400 hover:text-emerald-500 hover:bg-white hover:shadow-md transition-all flex items-center justify-center border border-transparent hover:border-slate-100">
+                          <i class="material-icons text-sm">check</i>
+                      </button>
+                      <button class="w-9 h-9 rounded-xl bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-white hover:shadow-md transition-all flex items-center justify-center border border-transparent hover:border-slate-100">
+                          <i class="material-icons text-sm">close</i>
+                      </button>
+                  </div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  <!-- Pagination Placeholder -->
+  <div class="px-8 py-6 bg-slate-50/30 border-t border-slate-50 flex justify-between items-center">
+      <p class="text-[12px] font-bold text-slate-400 uppercase tracking-widest">Showing 2 of 14 Appointments</p>
+      <div class="flex gap-2">
+          <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white transition"><i class="fa-solid fa-chevron-left text-[10px]"></i></button>
+          <button class="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white transition"><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+      </div>
+  </div>
+</div>

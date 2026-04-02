@@ -1,0 +1,34 @@
+<header class="flex justify-between items-center mb-10">
+  <div>
+      <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Good morning, <span class="text-emerald-600">Dr. Helena</span></h1>
+      <p class="text-slate-500 mt-1 font-medium">Your clinic performance is up 12% today.</p>
+  </div>
+  <div class="relative">
+    <button (click)="toggleDropdown()" class="flex items-center gap-4 bg-white p-2 pr-5 rounded-[1.2rem] shadow-sm border border-slate-100 hover:shadow-md transition-all group">
+      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=100" class="w-10 h-10 rounded-xl object-cover border-2 border-emerald-500/20" alt="Doctor">
+      <div class="text-left hidden sm:block">
+        <p class="text-xs font-bold text-slate-900">Dr. Helena Silva</p>
+        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Chief Surgeon</p>
+      </div>
+      <i class="fa-solid fa-chevron-down text-[10px] text-slate-300 transition-transform" [class.rotate-180]="isDropdownOpen()"></i>
+    </button>
+
+    <!-- Dropdown Menu -->
+    @if (isDropdownOpen()) {
+      <div class="absolute right-0 mt-3 w-56 bg-white rounded-[1.5rem] shadow-2xl border border-slate-100 py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div class="px-5 py-3 mb-2 border-b border-slate-50">
+          <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Account</p>
+          <p class="text-xs font-bold text-slate-700 truncate">helena.silva&#64;aurahealth.com</p>
+        </div>
+        <a [routerLink]="['/doctor/my-profile']"  class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors">
+          <i class="material-icons text-slate-300">person</i> My Profile
+        </a>
+        <div class="mt-2 pt-2 border-t border-slate-50">
+          <button (click)="logout()" class="w-full flex items-center gap-3 px-5 py-3 text-sm font-bold text-rose-500 hover:bg-rose-50 transition-colors">
+            <i class="material-icons">lock</i> Log Out
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</header>

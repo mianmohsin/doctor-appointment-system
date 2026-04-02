@@ -1,0 +1,170 @@
+<!-- EMERGENCY CSS FIX -->
+<div class="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+
+  <!-- 1. TOP NAVIGATION / BREADCRUMB -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+    <div class="flex items-center gap-4">
+      <button (click)="goBack()"
+        class="p-2.5 bg-white border border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-100 rounded-xl transition-all shadow-sm group">
+        <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <div>
+        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em] mb-1">Doctor</p>
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Add New Doctor</h1>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="flex items-center gap-3">
+      <button (click)="goBack()"
+        class="px-6 py-2.5 text-sm font-bold text-slate-500 hover:bg-slate-100 rounded-xl transition-all">Cancel</button>
+      <button
+        class="px-8 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all">
+        Save Doctor
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. MAIN FORM CARD -->
+
+  <form [formGroup]="doctorForm" class="space-y-8">
+
+    <!-- CARD 1: PERSONAL & BASIC INFO -->
+    <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-200/60 p-10">
+      <h3 class="text-lg font-bold text-slate-800 mb-8 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-indigo-600 rounded-full"></span> Basic Information
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="space-y-2 lg:col-span-1">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+          <input formControlName="fullName" type="text"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+            placeholder="Dr. John Doe">
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+          <input formControlName="email" type="email"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+            placeholder="john@medcore.com">
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Gender</label>
+          <select formControlName="gender"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-indigo-500 outline-none appearance-none">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Contact Number</label>
+          <input formControlName="phone" type="tel"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+            placeholder="+91 000 000 0000">
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">License ID</label>
+          <input formControlName="licenseId" type="text"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+            placeholder="MED-10293">
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Consultation Fee</label>
+          <div class="relative">
+            <span class="absolute left-5 top-4 text-slate-400 font-bold">$</span>
+            <input formControlName="consultationFee" type="number"
+              class="w-full pl-10 pr-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+              placeholder="50.00">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: DYNAMIC SPECIALTIES & EXPERIENCE -->
+    <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-200/60 p-10">
+      <div class="flex justify-between items-center mb-8">
+        <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+          <span class="w-1.5 h-6 bg-emerald-500 rounded-full"></span> Specialties & Experience
+        </h3>
+        <button type="button" (click)="addSpecialty()"
+          class="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-black uppercase tracking-wider hover:bg-indigo-100 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="3" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+          Add Specialty
+        </button>
+      </div>
+
+      <div formArrayName="specialties" class="space-y-4">
+        <div *ngFor="let spec of specialties.controls; let i=index" [formGroupName]="i"
+          class="flex flex-col md:flex-row gap-4 p-4 bg-slate-50/50 rounded-3xl border border-slate-100 animate-in slide-in-from-left-4 duration-300">
+
+          <div class="flex-1 space-y-2">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Specialty Name</label>
+            <select formControlName="name"
+              class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none appearance-none">
+              <option>Cardiology</option>
+              <option>Neurology</option>
+              <option>Pediatrics</option>
+              <option>Dermatology</option>
+              <option>Orthopedics</option>
+            </select>
+          </div>
+
+          <div class="w-full md:w-48 space-y-2">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Exp (Years)</label>
+            <input formControlName="experience" type="number"
+              class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+              placeholder="5">
+          </div>
+
+          <div class="flex items-end pb-1">
+            <button type="button" (click)="removeSpecialty(i)" [disabled]="specialties.length === 1"
+              class="p-3 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                </path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: EDUCATION & BIO -->
+    <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-200/60 p-10">
+      <h3 class="text-lg font-bold text-slate-800 mb-8 flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Background & Bio
+      </h3>
+      <div class="space-y-6">
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Highest Education /
+            Degree</label>
+          <input formControlName="education" type="text"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+            placeholder="e.g. MD from Harvard Medical School">
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Biography</label>
+          <textarea formControlName="biography" rows="5"
+            class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
+            placeholder="Tell us more about the doctor's professional journey..."></textarea>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- 3. FOOTER ACTIONS (Mobile visible) -->
+  <div class="p-8 border-t border-slate-100 bg-slate-50/50 flex justify-end gap-3 md:hidden">
+    <button (click)="goBack()" class="px-6 py-2.5 text-sm font-bold text-slate-500">Cancel</button>
+    <button class="px-8 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-100">Save
+      Doctor</button>
+  </div>
+
+</div>

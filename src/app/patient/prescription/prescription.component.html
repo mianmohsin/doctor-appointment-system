@@ -1,0 +1,145 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">My Prescriptions</h1>
+  </div>
+<div
+  class="flex flex-wrap gap-4 items-center justify-between bg-white p-2 rounded-3xl shadow-sm border border-slate-100 mt-5">
+  <div class="relative flex-1 min-w-[300px]">
+    <i class="material-icons absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-md">search</i>
+    <input type="text" placeholder="Search Here..."
+      class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-2xl text-sm italic focus:bg-white transition-all">
+  </div>
+</div>
+
+</header>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+  <!-- Card 1 (Completed) -->
+  <div
+    class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 p-8 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">Dr. Ahmed Khan
+        </h3>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Cardiologist</p>
+      </div>
+      <span
+        class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm shadow-emerald-100/50">
+        Completed
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 text-slate-500 text-xs font-bold mb-8 bg-slate-50 w-fit px-3 py-1.5 rounded-lg">
+      <i class="fa-regular fa-calendar-check text-indigo-500"></i> 25 March 2024
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Prescribed Medicines</p>
+        <div class="grid grid-cols-1 gap-3">
+          <div
+            class="flex items-center justify-between p-2 bg-slate-50/50 rounded-2xl border border-slate-100 transition-colors hover:bg-white hover:border-indigo-100">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-indigo-500 shadow-sm"><i
+                  class="material-icons text-sm">healing</i></div>
+              <span class="text-sm font-bold text-slate-700">Paracetamol</span>
+            </div>
+            <span class="text-[10px] font-bold text-slate-400 bg-white px-2 py-1 rounded-md shadow-sm">2x Daily</span>
+          </div>
+          <div
+            class="flex items-center justify-between p-2 bg-slate-50/50 rounded-2xl border border-slate-100 transition-colors hover:bg-white hover:border-indigo-100">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-indigo-500 shadow-sm"><i
+                  class="material-icons text-sm">healing</i></div>
+              <span class="text-sm font-bold text-slate-700">Aspirin</span>
+            </div>
+            <span class="text-[10px] font-bold text-slate-400 bg-white px-2 py-1 rounded-md shadow-sm">1x Daily</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-indigo-50/30 p-5 rounded-2xl border border-dashed border-indigo-100">
+        <p class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-2">Doctor's Notes</p>
+        <p class="text-xs text-slate-600 font-medium leading-relaxed italic">"Take medicines after meal. Avoid oily food
+          and maintain hydration."</p>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between mt-5">
+      <button
+        class="text-sm font-extrabold text-indigo-600 hover:text-indigo-800 transition-all flex items-center gap-2">
+        View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </button>
+      <button
+        class="px-8 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg shadow-slate-900/10 transition-all active:scale-95 flex items-center gap-2">
+        <i class="material-icons text-sm">download</i> Download
+      </button>
+    </div>
+  </div>
+
+  <!-- Card 2 (Pending) -->
+  <div
+    class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 p-8 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group">
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">Dr. Sarah Ali
+        </h3>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Dermatologist</p>
+      </div>
+      <span
+        class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-amber-50 text-amber-600 border border-amber-100 shadow-sm shadow-amber-100/50">
+        Pending
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 text-slate-500 text-xs font-bold mb-8 bg-slate-50 w-fit px-3 py-1.5 rounded-lg">
+      <i class="fa-regular fa-calendar text-indigo-500"></i> 20 March 2024
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Prescribed Medicines</p>
+        <div class="grid grid-cols-1 gap-3">
+          <div
+            class="flex items-center justify-between p-2 bg-slate-50/50 rounded-2xl border border-slate-100 transition-colors hover:bg-white hover:border-indigo-100">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-indigo-500 shadow-sm"><i
+                  class="material-icons text-sm">healing</i></div>
+              <span class="text-sm font-bold text-slate-700">Skin Cream</span>
+            </div>
+            <span class="text-[10px] font-bold text-slate-400 bg-white px-2 py-1 rounded-md shadow-sm">Apply
+              Daily</span>
+          </div>
+          <div
+            class="flex items-center justify-between p-2 bg-slate-50/50 rounded-2xl border border-slate-100 transition-colors hover:bg-white hover:border-indigo-100">
+            <div class="flex items-center gap-4">
+              <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-indigo-500 shadow-sm"><i
+                  class="material-icons text-sm">healing</i></div>
+              <span class="text-sm font-bold text-slate-700">Antibiotic</span>
+            </div>
+            <span class="text-[10px] font-bold text-slate-400 bg-white px-2 py-1 rounded-md shadow-sm">2x Daily</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-indigo-50/30 p-5 rounded-2xl border border-dashed border-indigo-100">
+        <p class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-2">Doctor's Notes</p>
+        <p class="text-xs text-slate-600 font-medium leading-relaxed italic">"Avoid sunlight exposure. Keep the affected
+          area clean and dry."</p>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between mt-5">
+      <button
+        class="text-sm font-extrabold text-indigo-600 hover:text-indigo-800 transition-all flex items-center gap-2">
+        View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </button>
+      <button
+        class="px-8 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg shadow-slate-900/10 transition-all active:scale-95 flex items-center gap-2">
+        <i class="material-icons text-sm">download</i> Download
+      </button>
+    </div>
+  </div>
+
+</div>

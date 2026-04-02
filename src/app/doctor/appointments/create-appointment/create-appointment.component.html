@@ -1,0 +1,74 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+      <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Appointment</h1>
+  </div>
+  <button (click)="goBack()"  class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all flex items-center gap-2">
+       Back
+  </button>
+</header>
+
+<div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 p-10 sticky top-8">
+
+  <div class="space-y-6">
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Full Name</label>
+          <input type="text" placeholder="e.g. Jonathan Doe" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+      </div>
+      <div>
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Email</label>
+          <input type="email" placeholder="e.g. Jonathan Doe" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+      </div>
+      <div>
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Phone</label>
+          <input type="phone" placeholder="e.g. Jonathan Doe" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+      </div>
+      <div>
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Date of Birth</label>
+          <input type="date" class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500">
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Gendor</label>
+        <select class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500 appearance-none">
+          <option>Select</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Status</label>
+        <select class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500 appearance-none">
+          <option>Select</option>
+          <option>New</option>
+          <option>Returning</option>
+        </select>
+      </div>
+      <div class="">
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Address</label>
+          <input type="text" class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500">
+      </div>
+      <div class="">
+        <label for="name" class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Appointment Type:</label>
+        <div class="flex gap-4">
+          <div class="flex items-center">
+            <input type="radio" id="appointmenttype" value="inperson" class="mr-2">
+            <label for="inperson" class="text-[12px] font-medium tracking-widest text-slate-400 ml-1">In Person</label>
+          </div>
+          <div class="flex items-center">
+            <input type="radio" id="appointmenttype" value="online" class="mr-2">
+            <label for="online" class="text-[12px] font-medium tracking-widest text-slate-400 ml-1">Online</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-2">
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Clinical Reason</label>
+          <textarea rows="3" placeholder="Brief description of the symptoms..." class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all resize-none"></textarea>
+      </div>
+
+      <button type="submit" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-emerald-500/20 transition-all flex items-center justify-center gap-3">
+          <i class="material-icons">check</i> Create Appointment
+      </button>
+    </div>
+  </div>
+</div>
+

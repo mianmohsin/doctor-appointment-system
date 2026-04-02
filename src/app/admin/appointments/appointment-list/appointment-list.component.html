@@ -1,0 +1,375 @@
+<!-- PAGE TITLE SECTION -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+  <div>
+    <p class="text-[11px] font-black text-indigo-600 uppercase tracking-[0.2em] mb-2">Manage</p>
+    <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Appointments</h1>
+  </div>
+</div>
+<div class="bg-white rounded-[2rem] shadow-sm border border-slate-200/60 overflow-hidden">
+  <!-- TABLE TOOLBAR (SEARCH & FILTER) -->
+  <div
+    class="p-6 border-b border-slate-100 bg-slate-50/30 flex flex-col lg:flex-row justify-between items-center gap-4">
+
+    <!-- Search Bar -->
+    <div class="relative w-full lg:w-96">
+      <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </span>
+      <input type="text"
+        class="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-11 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all placeholder:text-slate-400"
+        placeholder="Search by name, Id...">
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex items-center gap-3 w-full lg:w-auto">
+
+      <!-- FILTER DROPDOWN SECTION -->
+      <div class="relative flex-1 lg:flex-none">
+
+        <!-- The Main Button (Shows the dynamic text) -->
+        <button (click)="isFilterDropdownOpen = !isFilterDropdownOpen; $event.stopPropagation()"
+          class="w-full lg:w-auto flex items-center justify-between gap-3 px-5 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-bold text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/30 transition-all shadow-sm">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-width="2"
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+              </path>
+            </svg>
+            <span>{{ selectedSpecialty }}</span>
+          </div>
+          <svg class="w-4 h-4 text-slate-400 transition-transform duration-200"
+            [class.rotate-180]="isFilterDropdownOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <!-- DROPDOWN MENU -->
+        <div *ngIf="isFilterDropdownOpen"
+          class="absolute left-0 lg:right-0 mt-2 w-64 bg-white rounded-[1.5rem] shadow-[0px_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 p-2 z-[90] animate-in slide-in-from-top-2 duration-200">
+
+          <p
+            class="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-50 mb-1">
+            Select Filter</p>
+
+          <div class="max-h-60 overflow-y-auto custom-scrollbar">
+            <!-- Loop through specialties -->
+            <button *ngFor="let item of specialties" (click)="selectSpecialty(item)"
+              [class.bg-indigo-50]="selectedSpecialty === item" [class.text-indigo-600]="selectedSpecialty === item"
+              class="w-full flex items-center justify-between px-4 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 rounded-xl transition-all group">
+
+              {{ item }}
+
+              <!-- Checkmark for selected item -->
+              <svg *ngIf="selectedSpecialty === item" class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="p-3 bg-white border border-slate-200 rounded-2xl text-slate-500 hover:bg-slate-50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MODERN DATA TABLE -->
+  <div class="overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="text-[11px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">
+          <th class="px-8 py-5">ID No.</th>
+          <th class="px-8 py-5">Patient Name</th>
+          <th class="px-8 py-5">Patient Info</th>
+          <th class="px-8 py-5">Doctor</th>
+          <th class="px-8 py-5">Date & Time</th>
+          <th class="px-8 py-5">Status</th>
+          <th class="px-8 py-5 text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-50">
+
+        <!-- SAMPLE ROW 1 -->
+        <tr class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
+          <td class="px-8 py-6">
+            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
+          </td>
+          <td class="px-8 py-6">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-2xl bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
+                <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-800 leading-none">Lee Smith</p>
+                <p
+                  class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
+                  Active Duty</p>
+              </div>
+            </div>
+          </td>
+          <td class="px-8 py-6">
+            <div class="space-y-1">
+              <p class="text-sm font-medium text-slate-600">john-gmail.com</p>
+              <p class="text-[11px] font-bold text-slate-400 tracking-tight">+91 8878 978 123</p>
+            </div>
+          </td>
+          <td class="px-8 py-6 text-center">
+            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">Dr.
+              Johnathan</span>
+          </td>
+          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
+            Oct 24, 10:30 AM
+          </td>
+          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
+            In Person
+          </td>
+          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
+            Confirmed
+          </td>
+          <td class="px-8 py-6 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button (click)="openPreview()"
+                class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
+                      c4.477 0 8.268 2.943 9.542 7
+                      -1.274 4.057-5.065 7-9.542 7
+                      -4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+
+              <!-- MODAL OVERLAY -->
+              <div *ngIf="showSlip" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <!-- Backdrop -->
+                <div (click)="closePreview()"
+                  class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300"></div>
+
+                <!-- Modal Content -->
+                <div
+                  class="relative printshadow bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+
+                  <!-- Header -->
+                  <div class="pt-6 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                    <h3 class="text-lg font-black text-slate-800 tracking-tight">Appointment Slip</h3>
+                    <button (click)="closePreview()" class="text-slate-400 hover:text-slate-600 p-2 closeicon">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- THE SLIP (Printable Area) -->
+                  <div id="printable-slip" class="p-8">
+                    <div class="bg-indigo-50/30 rounded-[2rem] border-2 border-dashed border-indigo-100 p-8 relative">
+
+                      <!-- Medcore Logo Mockup -->
+                      <div class="flex justify-between items-start mb-8">
+                        <div class="flex items-center gap-2">
+                          <div
+                            class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black">
+                            M</div>
+                          <span class="font-black text-slate-800 tracking-tighter">MEDCORE</span>
+                        </div>
+                        <div class="text-right">
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Slip ID</p>
+                          <p class="text-sm font-black text-indigo-600">{{selectedAppointment.id}}</p>
+                        </div>
+                      </div>
+
+                      <!-- Appointment Info Grid -->
+                      <div class="grid grid-cols-2 gap-y-6 mb-8">
+                        <div>
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Patient</p>
+                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.patientName}}</p>
+                        </div>
+                        <div>
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Doctor</p>
+                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.doctorName}}</p>
+                        </div>
+                        <div>
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Payment Type
+                          </p>
+                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.paymentType}}</p>
+                        </div>
+                        <div>
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Payment</p>
+                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.payment}}</p>
+                        </div>
+                        <div>
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Date & Time</p>
+                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.date}}</p>
+                          <p class="text-xs text-slate-500">{{selectedAppointment.time}}</p>
+                        </div>
+                        <div>
+                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Status</p>
+                          <span
+                            class="px-3 py-1 bg-emerald-100 text-emerald-600 text-[10px] font-black rounded-full uppercase">{{selectedAppointment.status}}</span>
+                        </div>
+                      </div>
+
+                      <div class="border-t border-indigo-100 pt-6 mb-6">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Clinic Address
+                        </p>
+                        <p class="text-xs font-medium text-slate-600 leading-relaxed">{{selectedAppointment.location}}
+                        </p>
+                      </div>
+
+                      <!-- Barcode Mockup -->
+                      <div class="flex flex-col items-center justify-center pt-4 opacity-60">
+                        <div class="flex gap-1 h-12">
+                          <div class="w-1 bg-slate-800 h-full"></div>
+                          <div class="w-0.5 bg-slate-800 h-full"></div>
+                          <div class="w-2 bg-slate-800 h-full"></div>
+                          <div class="w-0.5 bg-slate-800 h-full"></div>
+                          <div class="w-1 bg-slate-800 h-full"></div>
+                          <div class="w-1.5 bg-slate-800 h-full"></div>
+                          <div class="w-0.5 bg-slate-800 h-full"></div>
+                          <div class="w-2 bg-slate-800 h-full"></div>
+                          <div class="w-1 bg-slate-800 h-full"></div>
+                          <div class="w-0.5 bg-slate-800 h-full"></div>
+                          <div class="w-1 bg-slate-800 h-full"></div>
+                        </div>
+                        <p class="text-[9px] font-mono mt-1 text-slate-500 tracking-[0.5em] uppercase">
+                          {{selectedAppointment.id}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Action Buttons -->
+                  <div class="p-6 bg-slate-50 flex gap-4 printButton">
+                    <button (click)="printSlip()"
+                      class="flex-1 py-4 bg-white border border-slate-200 text-slate-700 rounded-2xl font-bold hover:bg-slate-100 transition-all flex items-center justify-center gap-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                      </svg>
+                      Print Slip
+                    </button>
+                    <button (click)="downloadPDF()"
+                      class="flex-1 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center justify-center gap-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
+          <td class="px-8 py-6">
+            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
+          </td>
+          <td class="px-8 py-6">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-2xl bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
+                <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-800 leading-none">Lee Smith</p>
+                <p
+                  class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
+                  Active Duty</p>
+              </div>
+            </div>
+          </td>
+          <td class="px-8 py-6">
+            <div class="space-y-1">
+              <p class="text-sm font-medium text-slate-600">john-gmail.com</p>
+              <p class="text-[11px] font-bold text-slate-400 tracking-tight">+91 8878 978 123</p>
+            </div>
+          </td>
+          <td class="px-8 py-6 text-center">
+            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">Dr.
+              Johnathan</span>
+          </td>
+          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
+            Oct 24, 10:30 AM
+          </td>
+          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
+            Online
+          </td>
+          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
+            Completed
+          </td>
+          <td class="px-8 py-6 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
+                      c4.477 0 8.268 2.943 9.542 7
+                      -1.274 4.057-5.065 7-9.542 7
+                      -4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!-- Repeat similar rows for other data -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="px-8 py-6 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Page 1 of 42</p>
+    <div class="flex gap-2">
+      <button
+        class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 cursor-not-allowed">Prev</button>
+      <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between" aria-label="Table navigation">
+        <ul class="flex gap-2 text-sm">
+
+          <li>
+            <a href="#"
+              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 cursor-not-allowed">1</a>
+          </li>
+          <li>
+            <a href="#"
+              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400">2</a>
+          </li>
+          <li>
+            <a href="#"
+              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400">3</a>
+          </li>
+          <li>
+            <a href="#"
+              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 ">4</a>
+          </li>
+        </ul>
+      </nav>
+      <button
+        class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100">Next</button>
+    </div>
+  </div>
+
+</div>

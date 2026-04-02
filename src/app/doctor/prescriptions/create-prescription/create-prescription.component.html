@@ -1,0 +1,169 @@
+<header class="flex justify-between items-center mb-6">
+  <div>
+    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Create Prescription</h1>
+  </div>
+  <button (click)="goBack()"
+    class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all flex items-center gap-2">
+    Back
+  </button>
+</header>
+<div class="w-full">
+  <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 p-10 mb-5">
+    <div class="grid grid-cols-6 gap-4">
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">BP</label>
+        <input type="text"
+          class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Pulse</label>
+        <input type="text"
+          class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Temp</label>
+        <input type="text"
+          class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">SpO2</label>
+        <input type="text"
+          class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500">
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Age</label>
+        <input type="text"
+          class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500">
+      </div>
+      <div>
+        <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Weight</label>
+        <input type="text"
+          class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-xs font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all text-slate-500">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex gap-5">
+  <div class="w-[50%]">
+    <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 p-10">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Full
+            Name</label>
+          <input type="text" placeholder=""
+            class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+        </div>
+        <div>
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Date</label>
+          <input type="date" placeholder=""
+            class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all">
+        </div>
+
+        <div class="col-span-2">
+          <label
+            class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Diagnosis</label>
+          <textarea rows="3" placeholder="Brief description of the symptoms..."
+            class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all resize-none"></textarea>
+        </div>
+
+        <div class="col-span-2">
+          <label class="text-[12px] font-black uppercase tracking-widest text-slate-400 ml-1 mb-2 block">Medication &
+            Strength</label>
+          <textarea rows="3" placeholder="Brief description of the symptoms..."
+            class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all resize-none"></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-emerald-500/20 transition-all flex items-center justify-center gap-3">
+          <i class="material-icons">check</i> Create Prescription
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="w-[50%]">
+    <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 p-10">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-100">
+            <th class="px-4 w-50 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Medican
+            </th>
+            <th class="px-4 w-50 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Frequency
+            </th>
+            <th class="px-4 py-6 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          <!-- Row 1 -->
+          <tr class="transition-colors group">
+            <td class="px-3 py-2 text-sm text-slate-600">
+              <div class="w-12 px-3 py-3 text-center">Amoxicillin 500mg</div>
+            </td>
+            <td class="px-3 py-2 text-sm font-semibold text-slate-600">
+              <div class="flex gap-2">
+                <div class="w-12 px-3 py-3 text-center">1</div>
+                <div class="w-12 px-3 py-3 text-center">0</div>
+                <div class="w-12 px-3 py-3 text-center">1</div>
+              </div>
+            </td>
+            <td class="px-3 py-2">
+              <button
+                class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+                <i class="material-icons">edit</i>
+              </button>
+              <button
+                class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+          <tr class="transition-colors group">
+            <td class="px-3 py-2 text-sm text-slate-600">
+              <div class="w-12 px-3 py-3 text-center">Amoxicillin 500mg</div>
+            </td>
+            <td class="px-3 py-2 text-sm font-semibold text-slate-600">
+              <div class="flex gap-2">
+                <div class="w-12 px-3 py-3 text-center">1</div>
+                <div class="w-12 px-3 py-3 text-center">0</div>
+                <div class="w-12 px-3 py-3 text-center">1</div>
+              </div>
+            </td>
+            <td class="px-3 py-2">
+              <button
+                class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+                <i class="material-icons">edit</i>
+              </button>
+              <button
+                class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+          <tr class="transition-colors group">
+            <td class="px-3 py-5 text-sm text-slate-600"><input type="text" placeholder="Name"
+                class="w-full px-3 py-3 bg-slate-50 border-none rounded-2xl text-sm italic focus:bg-white transition-all">
+            </td>
+            <td class="px-3 py-5 text-sm text-slate-600">
+              <div class="flex gap-2"><input type="text" placeholder="M"
+                  class="w-12 px-3 py-3 bg-slate-50 border-none text-center rounded-2xl text-sm italic focus:bg-white transition-all">
+                <input type="text" placeholder="D"
+                  class="w-12 px-3 py-3 bg-slate-50 border-none text-center rounded-2xl text-sm italic focus:bg-white transition-all">
+                <input type="text" placeholder="N"
+                  class="w-12 px-3 py-3 bg-slate-50 border-none rounded-2xl text-sm italic focus:bg-white transition-all">
+              </div>
+            </td>
+            <td class="px-3 py-5">
+              <button
+                class="w-8 h-8 rounded-lg text-slate-300 hover:text-slate-900 hover:bg-white hover:shadow-sm transition">
+                <i class="material-icons">save</i>
+              </button>
+              <button
+                class="w-8 h-8 rounded-lg text-red-300 hover:text-red-500 hover:bg-white hover:shadow-sm transition">
+                <i class="material-icons">close</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
