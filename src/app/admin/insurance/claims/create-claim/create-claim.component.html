@@ -1,0 +1,76 @@
+<div class="min-h-screen">
+    <!-- Back Button & Breadcrumb -->
+    <a routerLink="/claims" class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-indigo-600 mb-6 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Claims
+    </a>
+
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+      <!-- Form Header -->
+      <div class="bg-slate-900 p-8 text-white">
+        <h2 class="text-2xl font-bold">File a New Claim</h2>
+        <p class="text-slate-400 text-sm mt-2">Please provide the incident details and supporting documents.</p>
+      </div>
+
+      <form class="p-8 space-y-8">
+        <!-- Section 1: Incident Info -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs flex items-center justify-center">1</span>
+            Incident Details
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-slate-700">Claim Type</label>
+              <select class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                <option>Auto Collision</option>
+                <option>Property Damage</option>
+                <option>Medical</option>
+              </select>
+            </div>
+            <div class="space-y-1.5">
+              <label class="text-sm font-medium text-slate-700">Date of Incident</label>
+              <input type="date" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-sm font-medium text-slate-700">Description</label>
+            <textarea rows="4" placeholder="Briefly describe what happened..."
+                      class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all"></textarea>
+          </div>
+        </div>
+
+        <!-- Section 2: Uploads -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs flex items-center justify-center">2</span>
+            Evidence & Photos
+          </h3>
+
+          <div class="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:border-indigo-400 transition-colors cursor-pointer bg-slate-50/50">
+            <div class="flex flex-col items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-slate-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <p class="text-sm font-medium text-slate-700">Drop files here or click to upload</p>
+              <p class="text-xs text-slate-400 mt-1">PNG, JPG, PDF up to 10MB</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="pt-6 border-t border-slate-100 flex items-center justify-end gap-4">
+          <button type="button" class="px-6 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
+            Save Draft
+          </button>
+          <button type="submit" class="px-8 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 active:scale-95 transition-all">
+            Submit Claim
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

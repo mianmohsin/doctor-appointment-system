@@ -1,0 +1,105 @@
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Create New Policy</h1>
+      </div>
+      <button routerLink="/admin/insurance/policies/policy-list" class="text-slate-500 hover:text-slate-800 font-medium flex items-center gap-2 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Dashboard
+      </button>
+    </div>
+
+    <!-- Form Card -->
+    <form [formGroup]="policyForm" (ngSubmit)="onSubmit()" class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/60 overflow-hidden border border-slate-100">
+      <div class="p-8 md:p-12 space-y-10">
+
+        <!-- Section 1: Basic Information -->
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800">Basic Information</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Policy Name</label>
+              <input formControlName="name" placeholder="e.g. Tesla Model 3 Premium"
+                class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-slate-900 placeholder:text-slate-400">
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Policy Number</label>
+              <input formControlName="policy_no" placeholder="e.g. #POL-882901-X"
+                class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-slate-900">
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Insurance Type</label>
+              <select formControlName="type" class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-slate-900 appearance-none cursor-pointer">
+                <option value="Auto">Auto Insurance</option>
+                <option value="Home">Home/Residence</option>
+                <option value="Health">Health Insurance</option>
+                <option value="Life">Life Insurance</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Status</label>
+              <select formControlName="status" class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-slate-900 appearance-none cursor-pointer">
+                <option value="ACTIVE">Active</option>
+                <option value="RENEWAL DUE">Renewal Due</option>
+                <option value="EXPIRING SOON">Expiring Soon</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Financial Details -->
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zM17 13v-1a5 5 0 10-10 0v1" />
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800">Coverage & Financials</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Coverage Limit ($)</label>
+              <input type="number" formControlName="limit" placeholder="100,000"
+                class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 transition-all outline-none text-slate-900">
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Deductible ($)</label>
+              <input type="number" formControlName="deductible" placeholder="500"
+                class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 transition-all outline-none text-slate-900">
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-semibold text-slate-700 ml-1">Premium ($)</label>
+              <div class="relative">
+                <input type="number" formControlName="premium" placeholder="142"
+                  class="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 transition-all outline-none text-slate-900 pr-16">
+                <span class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 font-medium text-sm">/mo</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Actions -->
+        <div class="pt-6 border-t border-slate-100 flex items-center justify-end gap-4">
+          <button type="button" routerLink="/admin/insurance/policies"
+            class="px-8 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-slate-200 transition-all active:scale-95">
+            Cancel
+          </button>
+          <button type="submit"
+            class="px-10 py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+            Create Policy
+          </button>
+        </div>
+      </div>
+    </form>

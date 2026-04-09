@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { PatientLayoutComponent } from './shared/patient-layout/patient-layout.component';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
+import { MyInsuranceComponent } from './my-insurance/my-insurance.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,14 @@ const routes: Routes = [
         path: 'prescriptions',
         children: [
           { path: '', component: PrescriptionComponent }
+        ]
+      },
+
+      // My Insurance
+      {
+        path: 'my-insurance',
+        children: [
+          { path: '', component: MyInsuranceComponent }
         ]
       },
 

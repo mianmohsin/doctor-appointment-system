@@ -1,0 +1,160 @@
+<div class="">
+
+  <!-- PAGE TITLE & PRIMARY ACTION -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+    <div>
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">Insurance Provider</h2>
+      <p class="text-slate-500 font-medium text-sm mt-1">Manage all insurance companies and contact points.</p>
+    </div>
+    <button routerLink="/insurance/providers/create"
+      class="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 active:scale-95">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add New Provider
+    </button>
+  </div>
+
+  <!-- PROVIDERS LIST -->
+  <div class="space-y-4">
+
+    <!-- HEADER FOR THE LIST (Visible on Desktop) -->
+    <div class="hidden lg:grid grid-cols-12 px-8 mb-2 text-[11px] font-black text-slate-400 uppercase tracking-widest">
+      <div class="col-span-5">Company Information</div>
+      <div class="col-span-3">Contact Details</div>
+      <div class="col-span-2 text-center">Active Policies</div>
+      <div class="col-span-2 text-right">Actions</div>
+    </div>
+
+    <!-- PROVIDER ITEM CARD -->
+    <div
+      class="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1 transition-all duration-300 group">
+      <div class="grid grid-cols-1 lg:grid-cols-12 items-center gap-6">
+
+        <!-- COMPANY INFO -->
+        <div class="lg:col-span-5 flex items-center gap-5">
+          <div
+            class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 font-black text-lg group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
+            EF
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-slate-900 leading-none">EFU Insurance</h3>
+            <p class="text-xs font-bold text-indigo-500 mt-1.5 uppercase tracking-tighter">Premium Partner</p>
+          </div>
+        </div>
+
+        <!-- CONTACT DETAILS -->
+        <div class="lg:col-span-3 space-y-1">
+          <div class="flex items-center gap-2 text-slate-600 group/link">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span class="text-xs font-bold tracking-tight">0300-1234567</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-600">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span class="text-xs font-bold tracking-tight">supportefuinsurance.com</span>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="lg:col-span-2 text-center">
+          <span class="text-xl font-black text-slate-900">42</span>
+          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Policies</p>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="lg:col-span-2 flex justify-end gap-2">
+          <button
+            class="p-2.5 bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </button>
+          <button
+            class="p-2.5 bg-slate-50 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- REPEAT ITEM CARD (Example 2) -->
+    <div class="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+      <div class="grid grid-cols-1 lg:grid-cols-12 items-center gap-6">
+        <div class="lg:col-span-5 flex items-center gap-5">
+          <div
+            class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 font-black text-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-500">
+            SL
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-slate-900 leading-none">State Life</h3>
+            <p class="text-xs font-bold text-emerald-500 mt-1.5 uppercase tracking-tighter">Government Provider</p>
+          </div>
+        </div>
+        <div class="lg:col-span-3 space-y-1">
+          <div class="flex items-center gap-2 text-slate-600">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor">
+              <path
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                stroke-width="2" />
+            </svg>
+            <span class="text-xs font-bold">042-992121</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-600">
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor">
+              <path
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                stroke-width="2" />
+            </svg>
+            <span class="text-xs font-bold">claimsstatelife.com.pk</span>
+          </div>
+        </div>
+        <div class="lg:col-span-2 text-center">
+          <span class="text-xl font-black text-slate-900">128</span>
+          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Policies</p>
+        </div>
+        <div class="lg:col-span-2 flex justify-end gap-2">
+          <!-- Action buttons same as above -->
+          <button class="p-2.5 bg-slate-50 text-slate-400 hover:text-indigo-600 rounded-xl transition-all"><svg
+              class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER PAGINATION -->
+  <div class="mt-10 flex justify-between items-center px-4">
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Showing 1 to 2 of 12 Providers</p>
+    <div class="flex gap-2">
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-100 text-slate-400 hover:bg-indigo-600 hover:text-white transition-all"><svg
+          class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg></button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-600 text-white font-black shadow-lg shadow-indigo-100">1</button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-100 text-slate-400 hover:bg-indigo-600 hover:text-white transition-all">2</button>
+      <button
+        class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-100 text-slate-400 hover:bg-indigo-600 hover:text-white transition-all"><svg
+          class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg></button>
+    </div>
+  </div>
+
+</div>

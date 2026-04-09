@@ -1,0 +1,134 @@
+
+    <div class="space-y-10">
+
+      <!-- STATS GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <!-- Stat Card 1 -->
+        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all group">
+          <div class="flex justify-between items-start mb-4">
+            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <span class="text-[10px] font-black text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">+12.5%</span>
+          </div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Policies</p>
+          <h3 class="text-3xl font-black text-slate-900 mt-1">1,240</h3>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all group">
+          <div class="flex justify-between items-start mb-4">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Policies</p>
+          <h3 class="text-3xl font-black text-slate-900 mt-1">980</h3>
+        </div>
+
+        <!-- Stat Card 3 (Warning State) -->
+        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all group">
+          <div class="flex justify-between items-start mb-4">
+            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pending Claims</p>
+          <h3 class="text-3xl font-black text-slate-900 mt-1">75</h3>
+        </div>
+
+        <!-- Stat Card 4 -->
+        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm transition-all group">
+          <div class="flex justify-between items-start mb-4">
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+          </div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Approved Claims</p>
+          <h3 class="text-3xl font-black text-slate-900 mt-1">540</h3>
+        </div>
+
+      </div>
+
+      <!-- RECENT CLAIMS SECTION -->
+      <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+        <div class="p-8 border-b border-slate-50 flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-black text-slate-900 tracking-tight">Recent Claims</h2>
+            <p class="text-sm text-slate-400 font-medium">Monitoring the latest insurance requests</p>
+          </div>
+          <button class="px-5 py-2.5 bg-slate-50 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-100 transition-colors">View All Transactions</button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="text-[11px] font-black text-slate-400 uppercase tracking-widest">
+                <th class="px-8 py-5 font-bold">Patient</th>
+                <th class="px-8 py-5 font-bold">Provider</th>
+                <th class="px-8 py-5 font-bold">Date</th>
+                <th class="px-8 py-5 font-bold text-right">Amount</th>
+                <th class="px-8 py-5 font-bold text-center">Status</th>
+                <th class="px-8 py-5 font-bold text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50">
+              <tr class="group hover:bg-slate-50/50 transition-colors cursor-pointer">
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xs">AK</div>
+                    <div>
+                      <p class="text-sm font-black text-slate-900">Ali Khan</p>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase">Patient ID: #8821</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-8 py-5">
+                  <span class="text-sm font-bold text-slate-600">State Life Insurance</span>
+                </td>
+                <td class="px-8 py-5">
+                  <p class="text-sm font-bold text-slate-900">Oct 24, 2023</p>
+                  <p class="text-[10px] font-bold text-slate-400">10:45 AM</p>
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <span class="text-sm font-black text-slate-900">PKR 12,000</span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <span class="px-4 py-1.5 bg-amber-50 text-amber-600 text-[10px] font-black uppercase rounded-full tracking-widest">Pending</span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <button class="p-2 text-slate-300 hover:text-indigo-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr class="group hover:bg-slate-50/50 transition-colors">
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center font-bold text-xs">SM</div>
+                    <div>
+                      <p class="text-sm font-black text-slate-900">Sara Malik</p>
+                      <p class="text-[10px] font-bold text-slate-400">Patient ID: #9012</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-8 py-5"><span class="text-sm font-bold text-slate-600">Jubilee Health</span></td>
+                <td class="px-8 py-5 text-sm font-bold text-slate-900">Oct 23, 2023</td>
+                <td class="px-8 py-5 text-right"><span class="text-sm font-black text-slate-900">PKR 45,500</span></td>
+                <td class="px-8 py-5 text-center">
+                  <span class="px-4 py-1.5 bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase rounded-full tracking-widest">Approved</span>
+                </td>
+                <td class="px-8 py-5 text-center">
+                  <button class="p-2 text-slate-300 hover:text-indigo-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01"/></svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>

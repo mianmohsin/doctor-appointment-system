@@ -106,7 +106,7 @@
       <tbody class="divide-y divide-slate-50">
 
         <!-- SAMPLE ROW 1 -->
-        <tr class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
+        <tr *ngFor="let doctor of doctors" class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
           <td class="px-8 py-6">
             <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
           </td>
@@ -117,7 +117,7 @@
                 <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
               </div>
               <div>
-                <p class="text-sm font-bold text-slate-800 leading-none">Dr. Johnathan Smith</p>
+                <p class="text-sm font-bold text-slate-800 leading-none">{{ doctor.name }}/p>
                 <p
                   class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
                   Active Duty</p>

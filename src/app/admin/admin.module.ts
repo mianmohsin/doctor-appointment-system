@@ -28,6 +28,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { InvoiceListingComponent } from './invoices/invoice-listing/invoice-listing.component';
 import { AddInvoiceComponent } from './invoices/add-invoice/add-invoice.component';
+import { PolicyListComponent } from './insurance/policies/policy-list/policy-list.component';
 
 @NgModule({
   declarations: [

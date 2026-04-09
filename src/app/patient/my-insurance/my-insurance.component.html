@@ -1,0 +1,268 @@
+<!-- Header -->
+<div class="mb-8">
+  <h1 class="text-2xl md:text-3xl font-bold text-slate-900">My Insurance & Billing</h1>
+  <p class="text-slate-500">Manage your coverage, monitor claims, and view billing history.</p>
+</div>
+
+<!-- Top Grid: Policy & Stats -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+
+  <!-- Active Policy Card -->
+  <div
+    class="lg:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center">
+    <div class="w-24 h-24 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 flex-shrink-0">
+      <span class="text-2xl font-bold">EFU</span>
+    </div>
+    <div class="flex-1 text-center md:text-left">
+      <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+        <h2 class="text-xl font-bold text-slate-800">EFU Health Premium</h2>
+        <span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full">ACTIVE</span>
+      </div>
+      <p class="text-slate-500 text-sm mb-4">Policy Number: <span
+          class="text-slate-900 font-semibold">#POL-882901-X</span></p>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Coverage Limit</p>
+          <p class="text-lg font-bold text-slate-800">$100,000</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Deductible</p>
+          <p class="text-lg font-bold text-slate-800">$500</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full md:w-auto">
+      <button (click)="togglePolicyModal()"
+        class="w-full px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100">
+        View Policy Docs
+      </button>
+    </div>
+  </div>
+  <!-- Modal Backdrop -->
+  <div *ngIf="isPolicyModalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+
+    <!-- Dimmed Background -->
+    <div (click)="togglePolicyModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+    <!-- Modal Content -->
+    <div
+      class="relative bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+
+      <!-- Modal Header -->
+      <div class="bg-indigo-600 p-8 text-white relative">
+        <button (click)="togglePolicyModal()"
+          class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-2xl font-black">EFU</div>
+          <div>
+            <h3 class="text-2xl font-bold">{{ selectedPolicy.company }}</h3>
+            <p class="text-indigo-100 opacity-80">{{ selectedPolicy.policyNo }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-8 md:p-10">
+        <div class="grid grid-cols-2 gap-8 mb-10">
+          <div>
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Policy Type</label>
+            <p class="text-slate-900 font-bold text-lg mt-1">{{ selectedPolicy.type }}</p>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Coverage Status</label>
+            <p class="text-emerald-500 font-bold text-lg mt-1 flex items-center gap-2">
+              <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+              {{ selectedPolicy.status }}
+            </p>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Valid From</label>
+            <p class="text-slate-700 font-semibold mt-1">{{ selectedPolicy.startDate }}</p>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Valid To</label>
+            <p class="text-slate-700 font-semibold mt-1">{{ selectedPolicy.endDate }}</p>
+          </div>
+        </div>
+
+        <!-- Covered Members List -->
+        <div class="bg-slate-50 rounded-3xl p-6 mb-8">
+          <h4 class="text-sm font-black text-slate-800 uppercase tracking-wider mb-4">Covered Members</h4>
+          <ul class="space-y-3">
+            <li *ngFor="let member of selectedPolicy.coveredMembers"
+              class="flex items-center gap-3 text-slate-600 font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {{ member }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Footer Action -->
+        <div class="flex gap-4">
+          <button
+            class="flex-1 py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl hover:bg-slate-200 transition-all active:scale-95">
+            Download PDF
+          </button>
+          <button (click)="togglePolicyModal()"
+            class="flex-1 py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 active:scale-95">
+            Got it
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Quick Stats -->
+  <div class="bg-indigo-600 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200 flex flex-col justify-between">
+    <div>
+      <p class="text-indigo-100 text-sm font-medium">Outstanding Balance</p>
+      <h3 class="text-4xl font-black mt-1">$126.00</h3>
+    </div>
+    <button
+      class="mt-4 w-full py-3 bg-white/20 hover:bg-white/30 rounded-xl font-bold transition-all border border-white/30">
+      Pay Now
+    </button>
+  </div>
+</div>
+
+<!-- Tabs/Sections Wrapper -->
+<div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+
+  <!-- Section Headers -->
+  <div class="flex border-b border-slate-50 px-8 pt-6">
+    <button (click)="switchTab('claims')"
+      [ngClass]="activeTab === 'claims' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-400'"
+      class="pb-4 px-4 border-b-2 font-bold text-sm transition-all outline-none">
+      Claim History
+    </button>
+
+    <button (click)="switchTab('invoices')"
+      [ngClass]="activeTab === 'invoices' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-400'"
+      class="pb-4 px-4 border-b-2 font-bold text-sm hover:text-slate-600 transition-all outline-none">
+      Invoices
+    </button>
+  </div>
+
+  <!-- Claim History Table -->
+  <div class="p-4 md:p-8 overflow-x-auto">
+    <div *ngIf="activeTab === 'claims'">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="text-slate-400 text-xs uppercase tracking-widest border-b border-slate-50">
+            <th class="pb-4 font-bold">Claim ID</th>
+            <th class="pb-4 font-bold">Service / Date</th>
+            <th class="pb-4 font-bold">Doctor</th>
+            <th class="pb-4 font-bold">Amount</th>
+            <th class="pb-4 font-bold">Status</th>
+            <th class="pb-4 font-bold text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          <!-- Row 1 -->
+          <tr class="group hover:bg-slate-50/50 transition-colors">
+            <td class="py-5 font-bold text-slate-900">#CLM-88219</td>
+            <td class="py-5">
+              <p class="text-slate-800 font-semibold">Lab Services - Blood Panel</p>
+              <p class="text-slate-400 text-xs">Oct 24, 2023</p>
+            </td>
+            <td class="py-5 text-slate-600 font-medium">Dr. Sarah Smith</td>
+            <td class="py-5">
+              <p class="text-slate-900 font-bold">$120.00</p>
+              <p class="text-emerald-500 text-xs font-bold">Covered: $114.00</p>
+            </td>
+            <td class="py-5">
+              <span
+                class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black rounded-full uppercase">PROCESSING</span>
+            </td>
+            <td class="py-5 text-right">
+              <button class="p-2 text-slate-400 hover:text-indigo-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 2 -->
+          <tr class="group hover:bg-slate-50/50 transition-colors">
+            <td class="py-5 font-bold text-slate-900">#CLM-88102</td>
+            <td class="py-5">
+              <p class="text-slate-800 font-semibold">Medical Consultation</p>
+              <p class="text-slate-400 text-xs">Oct 12, 2023</p>
+            </td>
+            <td class="py-5 text-slate-600 font-medium">Dr. Ahmed</td>
+            <td class="py-5">
+              <p class="text-slate-900 font-bold">$80.00</p>
+              <p class="text-emerald-500 text-xs font-bold">Paid by Ins: $80.00</p>
+            </td>
+            <td class="py-5">
+              <span
+                class="px-3 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-black rounded-full uppercase">APPROVED</span>
+            </td>
+            <td class="py-5 text-right">
+              <button class="p-2 text-slate-400 hover:text-indigo-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="activeTab === 'invoices'">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="text-slate-400 text-xs uppercase tracking-widest border-b border-slate-50">
+            <th class="pb-4 font-bold">Invoice ID</th>
+            <th class="pb-4 font-bold">Date Issued</th>
+            <th class="pb-4 font-bold">Doctor</th>
+            <th class="pb-4 font-bold">Amount</th>
+            <th class="pb-4 font-bold">Status</th>
+            <th class="pb-4 font-bold text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          <tr *ngFor="let inv of invoices" class="hover:bg-slate-50/50 transition-colors">
+            <td class="py-5 font-bold text-slate-900">#{{ inv.id }}</td>
+            <td class="py-5 text-slate-600 font-medium">{{ inv.date }}</td>
+            <td class="py-5 text-slate-600 font-medium">{{ inv.doctor }}</td>
+            <td class="py-5 font-extrabold text-slate-900">${{ inv.amount }}</td>
+            <td class="py-5">
+              <span [ngClass]="inv.status === 'PAID' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'"
+                class="px-3 py-1 text-[10px] font-black rounded-full uppercase">
+                {{ inv.status }}
+              </span>
+            </td>
+            <td class="py-5 text-right">
+              <button class="p-2 text-slate-400 hover:text-indigo-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2.5m2.5 0h2.5M12 17h2.5m2.5 0h2.5M9 17h2.5M3 17h2.5M6 17h2.5" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10V3L4 10h8zm0 0v7h8l-8-7z" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

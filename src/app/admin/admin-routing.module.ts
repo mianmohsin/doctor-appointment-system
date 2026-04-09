@@ -24,6 +24,18 @@ import { SettingsComponent } from './settings/settings.component';
 import { CreateAdminPrescriptionComponent } from './prescriptions/create-prescription/create-prescription.component';
 import { InvoiceListingComponent } from './invoices/invoice-listing/invoice-listing.component';
 import { AddInvoiceComponent } from './invoices/add-invoice/add-invoice.component';
+import { InsuranceDashboardComponent } from './insurance/insurance-dashboard/insurance-dashboard.component';
+import { ClaimStatusComponent } from './insurance/claims/claim-status/claim-status.component';
+import { ClaimListComponent } from './insurance/claims/claim-list/claim-list.component';
+import { ClaimDocumentsComponent } from './insurance/claims/claim-documents/claim-documents.component';
+import { CreateClaimComponent } from './insurance/claims/create-claim/create-claim.component';
+import { EmailComposeComponent } from './insurance/communications/email-compose/email-compose.component';
+import { EmailHistoryComponent } from './insurance/communications/email-history/email-history.component';
+import { PolicyDetailsComponent } from './insurance/policies/policy-details/policy-details.component';
+import { PolicyListComponent } from './insurance/policies/policy-list/policy-list.component';
+import { ProviderListComponent } from './insurance/providers/provider-list/provider-list.component';
+import { CreateProviderComponent } from './insurance/providers/create-provider/create-provider.component';
+import { CreatePolicyComponent } from './insurance/policies/create-policy/create-policy.component';
 
 const routes: Routes = [
   {
@@ -63,6 +75,44 @@ const routes: Routes = [
           { path: '', component: PrescriptionListComponent },
           { path: 'add', component: CreateAdminPrescriptionComponent },
           { path: 'edit/:id', component: CreatePrescriptionComponent }
+        ]
+      },
+      {
+        path: 'insurance',
+        children: [
+          { path: 'dashboard', component: InsuranceDashboardComponent },
+          {
+            path: 'claim',
+            children: [
+              { path: 'claim-list', component: ClaimListComponent },
+              { path: 'create', component: CreateClaimComponent },
+              { path: 'claim/:id', component: CreateClaimComponent },
+              { path: 'status', component: ClaimStatusComponent },
+              { path: 'documents', component: ClaimDocumentsComponent }
+            ]
+          },
+          {
+            path: 'communication',
+            children: [
+              { path: 'email-compose', component: EmailComposeComponent },
+              { path: 'email-history', component: EmailHistoryComponent }
+            ]
+          },
+          {
+            path: 'policies',
+            children: [
+              { path: 'create-policy', component: CreatePolicyComponent },
+              { path: 'policy-detail', component: PolicyDetailsComponent },
+              { path: 'policy-list', component: PolicyListComponent }
+            ]
+          },
+          {
+            path: 'providers',
+            children: [
+              { path: 'create', component: CreateProviderComponent },
+              { path: 'provider-list', component: ProviderListComponent }
+            ]
+          }
         ]
       },
       {

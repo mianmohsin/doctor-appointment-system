@@ -1,0 +1,93 @@
+<div class="min-h-screen">
+  <!-- Header Section -->
+  <div class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Claims Overview</h1>
+      <p class="text-slate-500 mt-1">Manage and track insurance claims requests.</p>
+    </div>
+    <a (click)="bookAppointment()"
+       class="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-semibold transition-all shadow-lg shadow-indigo-200 active:scale-95">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      New Claim
+    </a>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+      <span class="text-slate-500 text-sm font-medium uppercase tracking-wider">Active Claims</span>
+      <div class="flex items-end gap-2 mt-2">
+        <span class="text-3xl font-bold text-slate-900">124</span>
+        <span class="text-emerald-500 text-sm font-medium mb-1">+12%</span>
+      </div>
+    </div>
+    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+      <span class="text-slate-500 text-sm font-medium uppercase tracking-wider">Pending Review</span>
+      <div class="flex items-end gap-2 mt-2">
+        <span class="text-3xl font-bold text-slate-900">38</span>
+        <span class="text-amber-500 text-sm font-medium mb-1">Needs Action</span>
+      </div>
+    </div>
+    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+      <span class="text-slate-500 text-sm font-medium uppercase tracking-wider">Avg. Settlement</span>
+      <div class="flex items-end gap-2 mt-2">
+        <span class="text-3xl font-bold text-slate-900">$4,250</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters & Search -->
+  <div class="max-w-7xl mx-auto mb-6 flex items-center gap-4">
+    <div class="relative flex-1">
+      <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </span>
+      <input type="text" placeholder="Search claims by ID, customer or type..."
+             class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all">
+    </div>
+    <button class="bg-white p-3 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Claim List (Interactive Cards) -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 gap-4">
+    <!-- Item 1 -->
+    <div class="group bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md hover:border-indigo-200 transition-all cursor-pointer">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+            CL
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900">#CLM-99281 - Vehicle Collision</h3>
+            <p class="text-sm text-slate-500">Submitted by <span class="font-medium text-slate-700">John Doe</span> • 2 hours ago</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <div class="text-right hidden md:block">
+            <p class="text-sm font-bold text-slate-900">$2,400.00</p>
+            <p class="text-xs text-slate-500 uppercase tracking-tight">Estimated Loss</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-600 border border-amber-100">
+            Pending Review
+          </span>
+          <button class="p-2 text-slate-400 hover:text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional items would be mapped here -->
+  </div>
+</div>

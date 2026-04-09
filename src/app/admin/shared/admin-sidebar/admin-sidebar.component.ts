@@ -19,4 +19,20 @@ export class AdminSidebarComponent {
   closeSidebar() {
     this.isSidebarOpen = false;
   }
+
+  isOpen: any = {
+    doctors: false
+  };
+
+subMenuOpen: any = {};
+
+toggleSubMenu(key: string) {
+  this.subMenuOpen[key] = !this.subMenuOpen[key];
+}
+
+  toggleMenu(menu: string) {
+    this.isOpen[menu] = !this.isOpen[menu];
+  }
+
+
 }
