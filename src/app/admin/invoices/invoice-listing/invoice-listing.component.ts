@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InvoiceService } from '../../../core/services/invoice.service';
 
 @Component({
   selector: 'app-invoice-listing',
@@ -7,18 +8,50 @@ import { Component } from '@angular/core';
   styleUrl: './invoice-listing.component.css'
 })
 export class InvoiceListingComponent {
-  invoices = [
-    { id: 'INV-001', patient: 'Muhammad Mohsin', doctor: 'Dr. Ahmed', date: '01 Apr 2026', amount: 120, status: 'Paid', pImg: 'https://i.pravatar.cc/150?u=1' },
-    { id: 'INV-002', patient: 'Ali Khan', doctor: 'Dr. Ali', date: '02 Apr 2026', amount: 80, status: 'Pending', pImg: 'https://i.pravatar.cc/150?u=2' },
-    { id: 'INV-003', patient: 'Sara Noor', doctor: 'Dr. Ahmed', date: '02 Apr 2026', amount: 150, status: 'Cancelled', pImg: 'https://i.pravatar.cc/150?u=3' },
-  ];
 
-  stats = [
-    { label: 'Total Revenue', value: '$42,500', icon: 'trending-up', color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { label: 'Pending', value: '$1,280', icon: 'clock', color: 'text-amber-600', bg: 'bg-amber-50' },
-    { label: 'Cancelled', value: '$450', icon: 'x-circle', color: 'text-rose-600', bg: 'bg-rose-50' }
-  ];
+invoices: any[] = [];
+  stats: any = { total_revenue: 0, pending_amount: 0, cancelled_amount: 0 };
 
+  searchTerm: string = '';
+  selectedStatus: string = '';
+  currentPage: number = 1;
+
+  constructor(private invoiceService: InvoiceService) {}
+
+  ngOnInit() {
+    this.loadInvoices();
+    this.loadStats();
+  }
+
+  onSearch() {
+    this.currentPage = 1; // Reset to page 1 when filtering
+    this.loadInvoices();
+  }
+
+ loadInvoices() {
+    this.invoiceService.getInvoices(this.currentPage, this.searchTerm, this.selectedStatus)
+      .subscribe((res: any) => {
+        this.invoices = res.data;
+        // Update your pagination variables here (lastPage, total, etc)
+      });
+  }
+
+  loadStats() {
+    this.invoiceService.getStats().subscribe(res => this.stats = res);
+  }
+
+  deleteInvoice(id: number) {
+    if (confirm('Are you sure you want to delete this invoice?')) {
+      this.invoiceService.deleteInvoice(id).subscribe({
+        next: () => {
+          // Remove from local array to update UI instantly
+          this.invoices = this.invoices.filter(inv => inv.id !== id);
+          this.loadStats(); // Refresh stats
+        },
+        error: () => alert('Error deleting invoice')
+      });
+    }
+  }
 
   // Example data (this would come from your table row)
   printInvoice(invoice: any) {

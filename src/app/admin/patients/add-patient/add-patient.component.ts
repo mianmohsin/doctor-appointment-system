@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PatientService } from '../../../core/services/patient.service';
 
 @Component({
   selector: 'app-add-patient',
@@ -7,21 +8,24 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './add-patient.component.html',
   styleUrl: './add-patient.component.css'
 })
-
-export class AddPatientComponent {
-isEditMode = false;
+export class AddPatientComponent implements OnInit {
+  isEditMode = false;
   patientId: string | null = null;
+  isLoading = false;
 
-  // Form Object
   patientForm = {
-    name: 'Lee Smith',
-    email: 'john-gmail.com',
-    phone: '+91 8878 978 123',
-    status: 'Active',
-    profileImg: 'https://i.pravatar.cc/150?u=lee'
+    name: '',
+    email: '',
+    phone: '',
+    status: 'active', // Default to lowercase to match DB
+    profileImg: 'assets/images/default-avatar.png'
   };
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private patientService: PatientService
+  ) {}
 
   ngOnInit() {
     this.patientId = this.route.snapshot.paramMap.get('id');
@@ -29,23 +33,44 @@ isEditMode = false;
       this.isEditMode = true;
       this.loadPatientData(this.patientId);
     }
+
+
   }
 
   loadPatientData(id: string) {
-    // API call would go here: this.service.getPatient(id).subscribe(...)
-    console.log('Loading data for patient:', id);
+    this.isLoading = true;
+    this.patientService.getPatientById(id).subscribe({
+      next: (data) => {
+        // Map API data to form object
+        this.patientForm = {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          status: data.status,
+          profileImg: data.photo ? `http://127.0.0.1:8000/storage/${data.photo}` : 'https://i.pravatar.cc/150?u=' + id
+        };
+        this.isLoading = false;
+      },
+      error: (err) => console.error('Error loading patient:', err)
+    });
+  }
+
+  save() {
+    if (this.isEditMode && this.patientId) {
+      this.patientService.updatePatient(this.patientId, this.patientForm).subscribe({
+        next: () => {
+          alert('Profile updated successfully');
+          this.router.navigate(['/admin/patients']);
+        },
+        error: (err) => alert('Error updating profile: ' + err.error.message)
+      });
+    } else {
+      // Add logic for Create Patient here if needed
+      console.log('Create logic not implemented yet');
+    }
   }
 
   resetPassword() {
     alert('A password reset link has been sent to ' + this.patientForm.email);
-  }
-
-  save() {
-    if (this.isEditMode) {
-      console.log('Updating Patient...', this.patientForm);
-    } else {
-      console.log('Creating Patient...', this.patientForm);
-    }
-    this.router.navigate(['/patients']);
   }
 }

@@ -1,4 +1,3 @@
-<div class="p-8 bg-[#f8fafc] min-h-screen">
 
   <!-- Breadcrumbs / Back Button -->
   <div class="mb-8 flex items-center justify-between">
@@ -68,8 +67,11 @@
           <!-- Email -->
           <div class="space-y-2">
             <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Email Address</label>
-            <input type="email" [(ngModel)]="patientForm.email" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
-          </div>
+            <input type="email" [(ngModel)]="patientForm.email"
+         [readonly]="isEditMode" [class.bg-slate-100]="isEditMode" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
+
+  <p *ngIf="isEditMode" class="text-[9px] text-slate-400 mt-1 ml-1 font-bold italic">* Email cannot be changed for existing accounts</p>
+        </div>
 
           <!-- Phone -->
           <div class="space-y-2">
@@ -80,10 +82,11 @@
           <!-- Extra Admin Field Example -->
           <div class="space-y-2">
             <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</label>
-            <select class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
-              <option value="">Select</option>
-              <option value="">Active</option>
-              <option value="">Inative</option>
+
+             <select [(ngModel)]="patientForm.status"
+                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-4 focus:ring-indigo-50 font-bold text-slate-700 outline-none transition-all">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
             </select>
             </div>
         </div>
@@ -100,4 +103,3 @@
     </div>
 
   </div>
-</div>

@@ -28,9 +28,9 @@
           <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </span>
-      <input type="text"
+      <input type="text" [(ngModel)]="searchText" (input)="onSearch()"
         class="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-11 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all placeholder:text-slate-400"
-        placeholder="Search by name, email, or specialty...">
+        placeholder="Search by name, email, or departments...">
     </div>
 
     <!-- Filter Buttons -->
@@ -83,11 +83,6 @@
         </div>
       </div>
 
-      <button class="p-3 bg-white border border-slate-200 rounded-2xl text-slate-500 hover:bg-slate-50">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-      </button>
     </div>
   </div>
 
@@ -100,24 +95,28 @@
           <th class="px-8 py-5">Doctor Name</th>
           <th class="px-8 py-5">Contact Information</th>
           <th class="px-8 py-5 text-center">Department</th>
+          <th class="px-8 py-5 text-center">Status</th>
           <th class="px-8 py-5 text-right">Actions</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-50">
 
         <!-- SAMPLE ROW 1 -->
-        <tr *ngFor="let doctor of doctors" class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
+        <tr *ngFor="let doctor of pagedDoctors" class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
           <td class="px-8 py-6">
-            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
+            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">{{ doctor.id }}</span>
           </td>
           <td class="px-8 py-6">
             <div class="flex items-center gap-4">
               <div
                 class="w-12 h-12 rounded-2xl bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
-                <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
+                <!-- <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover"> -->
+                <img
+                  [src]="doctor.photo ? 'http://127.0.0.1:8000/storage/' + doctor.photo : 'https://i.pravatar.cc/150?u=' + doctor.id"
+                  class="w-full h-full object-cover">
               </div>
               <div>
-                <p class="text-sm font-bold text-slate-800 leading-none">{{ doctor.name }}/p>
+                <p class="text-sm font-bold text-slate-800 leading-none">{{ doctor.name }}</p>
                 <p
                   class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
                   Active Duty</p>
@@ -126,24 +125,32 @@
           </td>
           <td class="px-8 py-6">
             <div class="space-y-1">
-              <p class="text-sm font-medium text-slate-600">john-gmail.com</p>
-              <p class="text-[11px] font-bold text-slate-400 tracking-tight">+91 8878 978 123</p>
+              <p class="text-sm font-medium text-slate-600">{{ doctor.email }}</p>
+              <p class="text-[11px] font-bold text-slate-400 tracking-tight">{{ doctor.phone }}</p>
             </div>
           </td>
           <td class="px-8 py-6 text-center">
-            <span
-              class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">Cardiology</span>
+            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg"
+              *ngFor="let spec of doctor.specialties">
+              {{ spec.name }} ({{ spec.pivot.years_of_exp }} yrs)
+            </span>
+          </td>
+          <td class="px-8 py-6 text-center">
+            <span class="px-3 py-1 text-[10px] font-black uppercase rounded-lg"
+              [ngClass]="{'bg-green-100 text-green-600': doctor.status === 'active', 'bg-red-100 text-red-600': doctor.status === 'inactive'} ">
+              {{ doctor.status | uppercase }}
+            </span>
           </td>
           <td class="px-8 py-6 text-right">
             <div class="flex items-center justify-end gap-2">
-              <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
+              <button (click)="onEdit(doctor.id)" class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
                   </path>
                 </svg>
               </button>
-              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+              <button (click)="onDelete(doctor.id!)" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
@@ -153,88 +160,31 @@
             </div>
           </td>
         </tr>
-        <tr class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
-          <td class="px-8 py-6">
-            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
-          </td>
-          <td class="px-8 py-6">
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 rounded-2xl bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
-                <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
-              </div>
-              <div>
-                <p class="text-sm font-bold text-slate-800 leading-none">Dr. Johnathan Smith</p>
-                <p
-                  class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
-                  Active Duty</p>
-              </div>
-            </div>
-          </td>
-          <td class="px-8 py-6">
-            <div class="space-y-1">
-              <p class="text-sm font-medium text-slate-600">john-gmail.com</p>
-              <p class="text-[11px] font-bold text-slate-400 tracking-tight">+91 8878 978 123</p>
-            </div>
-          </td>
-          <td class="px-8 py-6 text-center">
-            <span
-              class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">Cardiology</span>
-          </td>
-          <td class="px-8 py-6 text-right">
-            <div class="flex items-center justify-end gap-2">
-              <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                  </path>
-                </svg>
-              </button>
-              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                  </path>
-                </svg>
-              </button>
-            </div>
-          </td>
-        </tr>
-        <!-- Repeat similar rows for other data -->
       </tbody>
     </table>
   </div>
 
-  <!-- PAGINATION -->
+  <!-- DYNAMIC PAGINATION -->
   <div class="px-8 py-6 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
-    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Page 1 of 42</p>
-    <div class="flex gap-2">
-      <button
-        class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 cursor-not-allowed">Prev</button>
-      <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between" aria-label="Table navigation">
-        <ul class="flex gap-2 text-sm">
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Page {{currentPage}} of {{totalPages}}</p>
 
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 cursor-not-allowed">1</a>
-          </li>
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400">2</a>
-          </li>
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400">3</a>
-          </li>
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 ">4</a>
-          </li>
-        </ul>
+    <div class="flex gap-2">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+        class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold transition-all"
+        [class.opacity-40]="currentPage === 1">Prev</button>
+
+      <nav class="flex gap-2">
+        <button *ngFor="let page of getPaginationArray()" (click)="goToPage(page)"
+          class="px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold transition-all"
+          [class.bg-indigo-600]="currentPage === page" [class.text-white]="currentPage === page"
+          [class.text-slate-400]="currentPage !== page">
+          {{ page }}
+        </button>
       </nav>
-      <button
-        class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100">Next</button>
+
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+        class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100 transition-all"
+        [class.opacity-40]="currentPage === totalPages">Next</button>
     </div>
   </div>
-
 </div>

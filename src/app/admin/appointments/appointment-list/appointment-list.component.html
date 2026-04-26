@@ -72,11 +72,6 @@
         </div>
       </div>
 
-      <button class="p-3 bg-white border border-slate-200 rounded-2xl text-slate-500 hover:bg-slate-50">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-      </button>
     </div>
   </div>
 
@@ -94,281 +89,228 @@
           <th class="px-8 py-5 text-right">Actions</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-50">
-
-        <!-- SAMPLE ROW 1 -->
-        <tr class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
+      <!-- TABLE BODY -->
+      <tbody class="divide-y divide-slate-100">
+        <tr *ngFor="let apt of appointments" class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
           <td class="px-8 py-6">
-            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
+            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">{{apt.id}}</span>
           </td>
           <td class="px-8 py-6">
             <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 rounded-2xl bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
-                <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
-              </div>
               <div>
-                <p class="text-sm font-bold text-slate-800 leading-none">Lee Smith</p>
-                <p
-                  class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
-                  Active Duty</p>
+                <p class="text-sm font-bold text-slate-800 leading-none">{{apt.patient.name}}</p>
               </div>
             </div>
           </td>
           <td class="px-8 py-6">
             <div class="space-y-1">
-              <p class="text-sm font-medium text-slate-600">john-gmail.com</p>
-              <p class="text-[11px] font-bold text-slate-400 tracking-tight">+91 8878 978 123</p>
+              <p class="text-sm font-medium text-slate-600">{{apt.patient.email}}</p>
+              <p class="text-[11px] font-bold text-slate-400 tracking-tight">{{apt.patient.phone}}</p>
             </div>
           </td>
           <td class="px-8 py-6 text-center">
-            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">Dr.
-              Johnathan</span>
+            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">
+              {{apt.doctor.name}}
+            </span>
           </td>
           <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
-            Oct 24, 10:30 AM
+            {{apt.appointment_date}}
           </td>
           <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
-            In Person
+            {{apt.type}}
           </td>
-          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
-            Confirmed
+          <td class="px-8 py-6 text-center">
+            <span [ngClass]="{
+        'bg-emerald-100 text-emerald-600': apt.status === 'Confirmed',
+        'bg-amber-100 text-amber-600': apt.status === 'Pending'
+      }" class="px-3 py-1 text-[10px] font-black uppercase rounded-lg">
+              {{apt.status}}
+            </span>
           </td>
           <td class="px-8 py-6 text-right">
             <div class="flex items-center justify-end gap-2">
-              <button (click)="openPreview()"
+              <!-- VIEW BUTTON: Trigger the Modal -->
+              <button (click)="openPreview(apt)"
                 class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
-                      c4.477 0 8.268 2.943 9.542 7
-                      -1.274 4.057-5.065 7-9.542 7
-                      -4.477 0-8.268-2.943-9.542-7z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5 c4.477 0 8.268 2.943 9.542 7 -1.274 4.057-5.065 7-9.542 7 -4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </button>
+              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </td>
+          <div *ngIf="showSlip && selectedAppointment" class="fixed inset-0 z-50 flex items-center justify-center p-4">
 
-              <!-- MODAL OVERLAY -->
-              <div *ngIf="showSlip" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-                <!-- Backdrop -->
-                <div (click)="closePreview()"
-                  class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300"></div>
+            <div (click)="closePreview()"
+              class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300"></div>
 
-                <!-- Modal Content -->
-                <div
-                  class="relative printshadow bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+            <!-- Modal Content -->
+            <div
+              class="relative printshadow bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
 
-                  <!-- Header -->
-                  <div class="pt-6 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                    <h3 class="text-lg font-black text-slate-800 tracking-tight">Appointment Slip</h3>
-                    <button (click)="closePreview()" class="text-slate-400 hover:text-slate-600 p-2 closeicon">
-                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
+              <!-- Header -->
+              <div class="pt-6 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <h3 class="text-lg font-black text-slate-800 tracking-tight">Appointment Slip</h3>
+                <button (click)="closePreview()" class="text-slate-400 hover:text-slate-600 p-2 closeicon">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
 
-                  <!-- THE SLIP (Printable Area) -->
-                  <div id="printable-slip" class="p-8">
-                    <div class="bg-indigo-50/30 rounded-[2rem] border-2 border-dashed border-indigo-100 p-8 relative">
+              <!-- THE SLIP (Printable Area) -->
+              <div id="printable-slip" class="p-8">
+                <div class="bg-indigo-50/30 rounded-[2rem] border-2 border-dashed border-indigo-100 p-8 relative">
 
-                      <!-- Medcore Logo Mockup -->
-                      <div class="flex justify-between items-start mb-8">
-                        <div class="flex items-center gap-2">
-                          <div
-                            class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black">
-                            M</div>
-                          <span class="font-black text-slate-800 tracking-tighter">MEDCORE</span>
-                        </div>
-                        <div class="text-right">
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Slip ID</p>
-                          <p class="text-sm font-black text-indigo-600">{{selectedAppointment.id}}</p>
-                        </div>
-                      </div>
-
-                      <!-- Appointment Info Grid -->
-                      <div class="grid grid-cols-2 gap-y-6 mb-8">
-                        <div>
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Patient</p>
-                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.patientName}}</p>
-                        </div>
-                        <div>
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Doctor</p>
-                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.doctorName}}</p>
-                        </div>
-                        <div>
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Payment Type
-                          </p>
-                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.paymentType}}</p>
-                        </div>
-                        <div>
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Payment</p>
-                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.payment}}</p>
-                        </div>
-                        <div>
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Date & Time</p>
-                          <p class="text-sm font-bold text-slate-800">{{selectedAppointment.date}}</p>
-                          <p class="text-xs text-slate-500">{{selectedAppointment.time}}</p>
-                        </div>
-                        <div>
-                          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Status</p>
-                          <span
-                            class="px-3 py-1 bg-emerald-100 text-emerald-600 text-[10px] font-black rounded-full uppercase">{{selectedAppointment.status}}</span>
-                        </div>
-                      </div>
-
-                      <div class="border-t border-indigo-100 pt-6 mb-6">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Clinic Address
-                        </p>
-                        <p class="text-xs font-medium text-slate-600 leading-relaxed">{{selectedAppointment.location}}
-                        </p>
-                      </div>
-
-                      <!-- Barcode Mockup -->
-                      <div class="flex flex-col items-center justify-center pt-4 opacity-60">
-                        <div class="flex gap-1 h-12">
-                          <div class="w-1 bg-slate-800 h-full"></div>
-                          <div class="w-0.5 bg-slate-800 h-full"></div>
-                          <div class="w-2 bg-slate-800 h-full"></div>
-                          <div class="w-0.5 bg-slate-800 h-full"></div>
-                          <div class="w-1 bg-slate-800 h-full"></div>
-                          <div class="w-1.5 bg-slate-800 h-full"></div>
-                          <div class="w-0.5 bg-slate-800 h-full"></div>
-                          <div class="w-2 bg-slate-800 h-full"></div>
-                          <div class="w-1 bg-slate-800 h-full"></div>
-                          <div class="w-0.5 bg-slate-800 h-full"></div>
-                          <div class="w-1 bg-slate-800 h-full"></div>
-                        </div>
-                        <p class="text-[9px] font-mono mt-1 text-slate-500 tracking-[0.5em] uppercase">
-                          {{selectedAppointment.id}}</p>
-                      </div>
+                  <!-- Medcore Logo Mockup -->
+                  <div class="flex justify-between items-start mb-8">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black">
+                        M</div>
+                      <span class="font-black text-slate-800 tracking-tighter">MEDCORE</span>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Slip ID</p>
+                      <p class="text-sm font-black text-indigo-600">{{selectedAppointment.id}}</p>
                     </div>
                   </div>
 
-                  <!-- Action Buttons -->
-                  <div class="p-6 bg-slate-50 flex gap-4 printButton">
-                    <button (click)="printSlip()"
-                      class="flex-1 py-4 bg-white border border-slate-200 text-slate-700 rounded-2xl font-bold hover:bg-slate-100 transition-all flex items-center justify-center gap-2">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                      </svg>
-                      Print Slip
-                    </button>
-                    <button (click)="downloadPDF()"
-                      class="flex-1 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center justify-center gap-2">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                      </svg>
-                      Download
-                    </button>
+                  <!-- Appointment Info Grid -->
+                  <div class="grid grid-cols-2 gap-y-6 mb-8">
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Patient</p>
+                      <p class="text-sm font-bold text-slate-800">{{selectedAppointment.patient.name}}</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Doctor</p>
+                      <p class="text-sm font-bold text-slate-800">{{selectedAppointment.doctor.name}}</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Appointment Type
+                      </p>
+                      <p class="text-sm font-bold text-slate-800">{{selectedAppointment.type}}</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Payment</p>
+                      <p class="text-sm font-bold text-slate-800">Cash</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Date & Time</p>
+                      <p class="text-sm font-bold text-slate-800">{{selectedAppointment.appointment_date}}</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Status</p>
+
+
+                      <span [ngClass]="{
+        'bg-emerald-100 text-emerald-600': selectedAppointment.status === 'Confirmed',
+        'bg-amber-100 text-amber-600': selectedAppointment.status === 'Pending'
+      }" class="px-3 py-1 text-[10px] font-black uppercase rounded-lg">
+                        {{selectedAppointment.status}}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="border-t border-indigo-100 pt-6 mb-6">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Clinic Address
+                    </p>
+                    <p class="text-xs font-medium text-slate-600 leading-relaxed">
+                      {{selectedAppointment.patient.address}}
+                    </p>
+                  </div>
+
+                  <!-- Barcode Mockup -->
+                  <div class="flex flex-col items-center justify-center pt-4 opacity-60">
+                    <div class="flex gap-1 h-12">
+                      <div class="w-1 bg-slate-800 h-full"></div>
+                      <div class="w-0.5 bg-slate-800 h-full"></div>
+                      <div class="w-2 bg-slate-800 h-full"></div>
+                      <div class="w-0.5 bg-slate-800 h-full"></div>
+                      <div class="w-1 bg-slate-800 h-full"></div>
+                      <div class="w-1.5 bg-slate-800 h-full"></div>
+                      <div class="w-0.5 bg-slate-800 h-full"></div>
+                      <div class="w-2 bg-slate-800 h-full"></div>
+                      <div class="w-1 bg-slate-800 h-full"></div>
+                      <div class="w-0.5 bg-slate-800 h-full"></div>
+                      <div class="w-1 bg-slate-800 h-full"></div>
+                    </div>
+                    <p class="text-[9px] font-mono mt-1 text-slate-500 tracking-[0.5em] uppercase">
+                      {{selectedAppointment.id}}</p>
                   </div>
                 </div>
               </div>
-              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                  </path>
-                </svg>
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr class="group hover:bg-indigo-50/30 transition-all cursor-pointer">
-          <td class="px-8 py-6">
-            <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-indigo-600">#MD-1029</span>
-          </td>
-          <td class="px-8 py-6">
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 rounded-2xl bg-indigo-100 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">
-                <img src="https://i.pravatar.cc/150?u=doc1" class="w-full h-full object-cover">
-              </div>
-              <div>
-                <p class="text-sm font-bold text-slate-800 leading-none">Lee Smith</p>
-                <p
-                  class="text-[10px] font-bold text-emerald-600 mt-2 bg-emerald-50 px-2 py-0.5 rounded-full inline-block">
-                  Active Duty</p>
+
+              <!-- Action Buttons -->
+              <div class="p-6 bg-slate-50 flex gap-4 printButton">
+                <button (click)="openPreview(apt)"
+                  class="flex-1 py-4 bg-white border border-slate-200 text-slate-700 rounded-2xl font-bold hover:bg-slate-100 transition-all flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                  </svg>
+                  Print Slip
+                </button>
+                <button
+                  class="flex-1 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100 flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download
+                </button>
               </div>
             </div>
-          </td>
-          <td class="px-8 py-6">
-            <div class="space-y-1">
-              <p class="text-sm font-medium text-slate-600">john-gmail.com</p>
-              <p class="text-[11px] font-bold text-slate-400 tracking-tight">+91 8878 978 123</p>
-            </div>
-          </td>
-          <td class="px-8 py-6 text-center">
-            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-black uppercase rounded-lg">Dr.
-              Johnathan</span>
-          </td>
-          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
-            Oct 24, 10:30 AM
-          </td>
-          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
-            Online
-          </td>
-          <td class="px-8 py-6 text-center text-sm font-medium text-slate-600">
-            Completed
-          </td>
-          <td class="px-8 py-6 text-right">
-            <div class="flex items-center justify-end gap-2">
-              <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
-                      c4.477 0 8.268 2.943 9.542 7
-                      -1.274 4.057-5.065 7-9.542 7
-                      -4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </button>
-              <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                  </path>
-                </svg>
-              </button>
-            </div>
-          </td>
+          </div>
+
         </tr>
-        <!-- Repeat similar rows for other data -->
       </tbody>
     </table>
   </div>
 
   <!-- PAGINATION -->
   <div class="px-8 py-6 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
-    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Page 1 of 42</p>
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">
+      Page {{currentPage}} of {{lastPage}}
+    </p>
+
     <div class="flex gap-2">
-      <button
-        class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 cursor-not-allowed">Prev</button>
-      <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between" aria-label="Table navigation">
+      <!-- PREV BUTTON -->
+      <button (click)="loadAppointments(currentPage - 1)" [disabled]="currentPage === 1"
+        class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 disabled:opacity-50">
+        Prev
+      </button>
+
+      <nav aria-label="Table navigation">
         <ul class="flex gap-2 text-sm">
 
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 cursor-not-allowed">1</a>
+          <!-- THE 1 2 3 4 PAGING LOGIC -->
+          <li *ngFor="let pageNum of visiblePages">
+            <button (click)="loadAppointments(pageNum)" [ngClass]="{
+              'bg-indigo-600 text-white border-indigo-600': currentPage === pageNum,
+              'bg-white text-slate-400 border-slate-200 hover:bg-slate-50': currentPage !== pageNum
+            }" class="px-4 py-2 border rounded-xl text-xs font-bold transition-all shadow-sm">
+              {{ pageNum }}
+            </button>
           </li>
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400">2</a>
-          </li>
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400">3</a>
-          </li>
-          <li>
-            <a href="#"
-              class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-400 ">4</a>
-          </li>
+          <!-- END OF PAGING LOGIC -->
+
         </ul>
       </nav>
-      <button
-        class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100">Next</button>
+
+      <!-- NEXT BUTTON -->
+      <button (click)="loadAppointments(currentPage + 1)" [disabled]="currentPage === lastPage"
+        class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100 disabled:bg-slate-300">
+        Next
+      </button>
     </div>
   </div>
 

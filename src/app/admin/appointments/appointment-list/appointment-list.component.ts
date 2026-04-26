@@ -1,4 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
+import { Appointment } from '../../../models/appointment.model';
+import { AppointmentService } from '../../../core/services/appointment.service';
 
 @Component({
   selector: 'app-appointment-list',
@@ -6,50 +8,84 @@ import { Component, ElementRef, HostListener } from '@angular/core';
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.css'
 })
+
 export class AppointmentListComponent {
 
   isFilterDropdownOpen = false;
   selectedSpecialty = 'Select Filter';
   specialties = ['Select Filter', 'Pending', 'In Progress', 'Completed'];
 
-  constructor(private eRef: ElementRef) { }
+  constructor(private eRef: ElementRef, private appointmentService: AppointmentService) { }
+
   selectSpecialty(specialty: string) {
     this.selectedSpecialty = specialty;
     this.isFilterDropdownOpen = false; // Close menu after selecting
     console.log('Filtering by:', specialty); // You can call your API filter here
   }
 
+  appointments: Appointment[] = [];
+  selectedAppointment: Appointment | null = null;
   showSlip = false;
-  selectedAppointment: any = null;
 
-  // Mock Data (In a real app, this comes from your table row click)
-  appointmentData = {
-    id: '#MD-1029',
-    patientName: 'Lee Smith',
-    patientEmail: 'john-gmail.com',
-    patientPhone: '+91 8878 978 123',
-    doctorName: 'Dr. Johnathan',
-    date: 'Oct 24, 2023',
-    time: '10:30 AM',
-    type: 'In Person',
-    payment: '500',
-    paymentType: 'cash',
-    status: 'Confirmed',
-    location: 'Medcore Clinic, Block A, NY'
-  };
+  currentPage: number = 1;
+  lastPage: number = 1;
+  totalAppointments: number = 0;
 
-  openPreview() {
-    this.selectedAppointment = this.appointmentData;
+  ngOnInit() {
+    this.loadAppointments(1);
+  }
+
+  loadAppointments(page: number) {
+  this.appointmentService.getAppointments(page).subscribe({
+    next: (res: any) => {
+      console.log('API Response:', res); // <--- OPEN YOUR BROWSER CONSOLE (F12) TO SEE THIS
+
+      // If your API returns a standard Laravel pagination:
+      if (res && res.data) {
+        this.appointments = res.data;     // The array is inside 'data'
+        this.currentPage = res.current_page;
+        this.lastPage = res.last_page;
+        this.totalAppointments = res.total;
+      } else {
+        // If your API just returns a simple array (no pagination):
+        this.appointments = res;
+      }
+    },
+    error: (err) => {
+      console.error('API Error:', err);
+    }
+  });
+}
+
+// Helper to generate the array of page numbers [1, 2, 3, 4...]
+getPaginationRange() {
+  const pages = [];
+  // Show 5 pages around the current page
+  for (let i = Math.max(1, this.currentPage - 2); i <= Math.min(this.lastPage, this.currentPage + 2); i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
+get visiblePages(): number[] {
+  const pages = [];
+  const startPage = Math.max(1, this.currentPage - 1);
+  const endPage = Math.min(this.lastPage, startPage + 3); // Shows 4 numbers
+
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
+  openPreview(appointment: Appointment) {
+    this.selectedAppointment = appointment;
     this.showSlip = true;
   }
 
   closePreview() {
     this.showSlip = false;
-  }
-
-  downloadPDF() {
-    alert('Generating PDF for ' + this.selectedAppointment.id);
-    // In production, use libraries like jspdf or html2canvas
+    this.selectedAppointment = null;
   }
 
   printSlip() {
@@ -63,4 +99,5 @@ export class AppointmentListComponent {
       this.isFilterDropdownOpen = false;
     }
   }
+
 }

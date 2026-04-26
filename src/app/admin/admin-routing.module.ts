@@ -59,7 +59,7 @@ const routes: Routes = [
         children: [
           { path: '', component: PatientListComponent },
           { path: ':id', component: AddPatientComponent },
-          { path: 'patients/edit-patient', component: AddPatientComponent }, // Reuse component
+          { path: 'edit-patient/:id', component: AddPatientComponent }, // Reuse component
         ]
       },
       {
